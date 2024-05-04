@@ -1,0 +1,23 @@
+{
+    "matcha": {
+        "ingredients": ["matcha powder", "water", "milk"]
+    },
+    "latte": {
+        "ingredients": ["coffee", "milk"]
+    },
+    "choco-milk": {
+        "ingredients": ["chocolate powder", "milk"]
+    },
+    "mocha": {
+        "ingredients": ["coffee", "chocolate powder", "milk"]
+    },
+    "milkshake": {
+        "ingredients": ["milk", "ice cream"]
+    },
+    "lemonade": {
+        "ingredients": ["lemon", "tea"]
+    },
+    "milk-tea": {
+        "ingredients": ["milk", "tea"]
+    }
+   }
