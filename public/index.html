@@ -224,7 +224,8 @@
         ];
 
         $("#blender").on("click", function() {
-        $("#blender").css("animation-name", "blender-animation");
+            Socket.checkDrink("matcha", "");
+            $("#blender").css("animation-name", "blender-animation");
         });
 
         $("#blender").on("animationend", function() {
@@ -402,6 +403,7 @@
             requestAnimationFrame(doFrame);
         });
     });
+
     </script>
 
 

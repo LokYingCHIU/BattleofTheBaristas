@@ -228,6 +228,19 @@ io.on("connection", (socket) => {
         // Send the online users to the browser
         io.emit("typingAlert", JSON.stringify(typingUser));
     });
+
+    socket.on("check drink", (drinkname, userrecipe) =>{ 
+        // drinkname: string of the assigned drink name
+        // userrecipe: array of strings of the ingredients submit by the player
+        const recipes = JSON.parse(fs.readFileSync("./data/recipe.json")); 
+        const correct_recipe = recipes[drinkname];
+        if (correct_recipe == userrecipe) {
+            io.emit("post check result", "success");
+        }
+        else {
+            io.emit("post check result", "fail");
+        }
+    });
 });
 
 // Use a web server to listen at port 8000
