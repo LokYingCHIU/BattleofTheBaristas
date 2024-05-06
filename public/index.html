@@ -14,7 +14,7 @@
     #game-container {
         position: relative;
     }
-    canvas, #counter, #game-start, #game-over{
+    canvas, #counter, #game-start, #game-over, #order{
         position: absolute;
         top: 0px;
         left: 0px;
@@ -77,6 +77,12 @@
         <svg xmlns="http://www.w3.org/2000/svg" id="counter">
             <text x="10" y="35">
                 TIME:<tspan id="time-remaining">20</tspan>
+            </text>
+        </svg>
+
+        <svg xmlns="http://www.w3.org/2000/svg" id="order">
+            <text x="170" y="35">
+                ORDER:<tspan id="ordered-item">matcha</tspan>
             </text>
         </svg>
 
@@ -195,7 +201,8 @@
         const gameArea = BoundingBox(context, 100, 100, 550, 550);
 
         /* Create the sprites in the game */
-        const drinks = []; 
+        const drinks = ["matcha", "latte", "chocmilk", "mocha", "milkshake","lemonade", "milktea"]; 
+        const inblender = [];
 
         const player = Player(context, 320, 270, gameArea); // The player
         const gem = Gem(context, 450, 450, "green");        // The gem
@@ -222,6 +229,7 @@
 
         $("#blender").on("animationend", function() {
             $("#blender").css("animation-name", "none");
+            inblender = [];
             ingredient = [
                 Ingredient(context, 157,385, "water"),
                 Ingredient(context, 157,165, "matchap"),
@@ -270,9 +278,6 @@
                 if(ingredient[i]!=0)ingredient[i].update(now);
             }
 
-
-
-
             for (let i = 0; i < ingredient.length; i++){
                 if(ingredient[i]!= 0){
                     const {x,y}= ingredient[i].getXY();
@@ -283,6 +288,33 @@
                         sounds.collect.play();
                         ingredient[i] = 0;
 
+
+                switch(x,y){ //Adding selected ingredients to inblender array
+                    case(157,385): 
+                        inblender.push("water"); 
+                        break;
+                    case(157,165): 
+                        inblender.push("matchap"); 
+                        break;
+                    case(157,285): 
+                        inblender.push("milk"); 
+                        break;
+                    case(320, 385): 
+                        inblender.push("choco"); 
+                        break;
+                    case(320,155): 
+                        inblender.push("lemon"); 
+                        break;
+                    case(493,270): 
+                        inblender.push("tea"); 
+                        break;
+                    case(493,385): 
+                        inblender.push("ice"); 
+                        break;
+                    case(493,155): 
+                        inblender.push("coffee"); 
+                        break;
+                };
                     }
                 }
             }
@@ -365,6 +397,8 @@
 
             /* Start the game */
             //gem.randomize(gameArea);
+            const order = drinks[Math.floor(Math.random() * 7)];//randomize drink order
+            $("#ordered-item").text(order);
             requestAnimationFrame(doFrame);
         });
     });
