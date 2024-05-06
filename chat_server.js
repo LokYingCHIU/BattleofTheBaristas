@@ -229,12 +229,12 @@ io.on("connection", (socket) => {
         io.emit("typingAlert", JSON.stringify(typingUser));
     });
 
-    socket.on("check drink", (drinkname, userrecipe) =>{ 
+    socket.on("check drink", (drinkname, playerrecipe) =>{ 
         // drinkname: string of the assigned drink name
         // userrecipe: array of strings of the ingredients submit by the player
         const recipes = JSON.parse(fs.readFileSync("./data/recipe.json")); 
-        const correct_recipe = recipes[drinkname];
-        if (correct_recipe == userrecipe) {
+        const correct_recipe = recipes[drinkname].ingredients;
+        if (JSON.stringify(correct_recipe) === JSON.stringify(playerrecipe.sort())) {
             io.emit("post check result", "success");
         }
         else {
