@@ -1,61 +1,78 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Collect the Gems!</title>
+    <title>Battle of The Baristas!</title>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="style.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P" rel="stylesheet">
+
     <style>
-        body {
-            font-family: "Press Start 2P", sans-serif;
-        }
-        #game-container {
-            position: relative;
-        }
-        canvas, #counter, #game-start, #game-over {
-            position: absolute;
-            top: 0px;
-            left: 0px;
-        }
-        canvas, #game-start, #game-over {
-            border: 1px solid gray;
-            width: 854px;
-            height: 480px;
-        }
-        canvas {
-            background: url(background.png);
-            background-size: cover;
-        }
-        #game-start, #game-over {
-            background: rgba(1, 1, 1, 0.8);
-        }
-        #counter text {
-            font-size: 130%;
-            fill: white;
-            stroke: black;
-            stroke-width: 1px;
-        }
-        #game-start text {
-            font-size: 150%;
-            fill: white;
-            text-anchor: middle;
-        }
-        #game-start #game-title {
-            font-size: 400%;
-            fill: url(#title-fill);
-            stroke: black;
-        }
-        #game-over text {
-            font-size: 120%;
-            fill: url(#game-over-fill);
-            text-anchor: middle;
-        }
-        </style>
+    body {
+        font-family: "Press Start 2P", sans-serif;
+    }
+    #game-container {
+        position: relative;
+    }
+    canvas, #counter, #game-start, #game-over{
+        position: absolute;
+        top: 0px;
+        left: 0px;
+    }
+    canvas, #game-start, #game-over {
+        border: 1px solid gray;
+        /* width: 854px;
+        height: 480px; */
+        width: 650px;
+        height: 620px;
+    }
+    canvas {
+        background: url(./images/background.png);
+        background-size: cover;
+    }
+    #game-start, #game-over {
+        background: rgba(1, 1, 1, 0.8);
+    }
+
+    #blender {
+        transform: translate(310px, 520px);
+        animation-name: none;
+        animation-duration: 0.7s;
+    }
+
+    #counter text {
+        font-size: 130%;
+        fill: white;
+        stroke: black;
+        stroke-width: 1px;
+    }
+    #game-start text {
+        font-size: 150%;
+        fill: white;
+        text-anchor: middle;
+    }
+    #game-start #game-title {
+        font-size: 300%;
+        fill: url(#title-fill);
+        stroke: black;
+    }
+    #game-over text {
+        font-size: 100%;
+        fill: url(#game-over-fill);
+        text-anchor: middle;
+    }
+
+    @keyframes blender-animation {
+        0%   { transform: translateX(310px) translateY(520px) rotate(0deg) ;}
+        33%  { transform: translateX(310px) translateY(520px) rotate(30deg) ;}
+        66%  { transform: translateX(310px) translateY(520px)rotate(-30deg) ;}
+        100% { transform: translateX(310px) translateY(520px)rotate(0deg) ;}
+    }
+    </style>
 </head>
 <body>
     <div id="game-container">
-        <canvas width="854px" height="480px"></canvas>
+        <canvas width="600px" height="600px"></canvas>
 
         <svg xmlns="http://www.w3.org/2000/svg" id="counter">
             <text x="10" y="35">
@@ -90,7 +107,21 @@
                 gem(s).
             </text>
         </svg>
+
+        <svg height="85px" width="85px" id="blender" xmlns="http://www.w3.org/2000/svg"
+            xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 432.074 432.074" fill="#000000" style="transform: translate(310px, 520px)">
+            <g>
+                <path style="fill:#231F20;"
+                    d="M201.883,360.072h-27.325c-6.019,0-10.9,4.878-10.9,10.897c0,6.021,4.881,10.899,10.9,10.899h27.325 c6.02,0,10.9-4.878,10.9-10.899C212.783,364.95,207.902,360.072,201.883,360.072z">
+                </path>
+                <path style="fill:#231F20;"
+                    d="M299.171,37.684l1.195-13.705c0.243-2.792-0.697-5.559-2.591-7.625 c-1.894-2.066-4.568-3.243-7.372-3.243h-50.537C236.139,5.354,228.21,0,219.031,0H157.41c-9.179,0-17.108,5.354-20.836,13.11 H86.037c-2.803,0-5.478,1.177-7.372,3.243c-1.894,2.066-2.834,4.833-2.591,7.625l23.964,274.96c0.002,0.024,0.007,0.047,0.01,0.071 L88.25,421.112c-0.271,2.807,0.655,5.597,2.55,7.685c1.896,2.087,4.584,3.277,7.403,3.277h180.031c0.007,0,0.013,0,0.02,0 c5.523,0,10-4.477,10-10c0-0.549-0.044-1.087-0.129-1.611L276.392,299.01c0.002-0.024,0.007-0.047,0.01-0.071l5.616-64.431 c4.252,0.926,8.602,1.41,13.021,1.41c33.635,0,60.999-27.362,60.999-60.996V98.529C356.037,66.284,330.884,39.818,299.171,37.684z M104.209,116.438c1.771,1.517,3.588,3.484,5.782,5.923c6.232,6.925,14.767,16.409,31.009,16.409 c16.241,0,24.776-9.484,31.008-16.409c5.949-6.609,9.12-9.787,16.142-9.787c7.022,0,10.194,3.178,16.143,9.787 c6.233,6.925,14.768,16.409,31.012,16.409c16.244,0,24.779-9.484,31.012-16.409c2.253-2.504,4.108-4.513,5.925-6.045 L257.273,288.07H119.168L104.209,116.438z M279.494,33.11l-5.26,60.358c-11.08,2.518-17.699,9.864-22.782,15.513 c-5.95,6.61-9.122,9.788-16.146,9.788c-7.025,0-10.196-3.178-16.146-9.788c-6.232-6.925-14.768-16.408-31.009-16.408 s-24.776,9.484-31.008,16.409c-5.949,6.609-9.12,9.787-16.142,9.787c-7.023,0-10.194-3.178-16.143-9.788 c-5.064-5.626-11.646-12.94-22.648-15.487L96.947,33.11H279.494z M109.216,412.074l10.049-104.004h137.909l10.048,104.004H109.216z M336.037,174.922c0,22.605-18.392,40.996-40.999,40.996c-3.851,0-7.622-0.532-11.264-1.572l13.661-156.742 c21.495,1.246,38.602,19.123,38.602,40.926V174.922z">
+                </path>
+            </g>
+        </svg>
     </div>
+
+    <!-- SIGN IN PART -->
 
     <div id="signin-overlay" class="overlay row">
         <div class="content shadow row">
@@ -124,173 +155,261 @@
         </div>
     </div>
 
+<!-- SIGN IN PART END -->
+
     <script src="/socket.io/socket.io.min.js"></script>
-    <script src="scripts/socket.js"></script>
-    <script src="scripts/avatar.js"></script>
-    <script src="scripts/ui.js"></script>
-    <script src="scripts/registration.js"></script>
-    <script src="scripts/authentication.js"></script>
+    <script src="./scripts/socket.js"></script>
+    <script src="./scripts/avatar.js"></script>
+    <script src="./scripts/ui.js"></script>
+    <script src="./scripts/registration.js"></script>
+    <script src="./scripts/authentication.js"></script>
+
     <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
-    <script src="bounding_box.js"></script>
-    <script src="sprite.js"></script>
-    <script src="player.js"></script>
-    <script src="gem.js"></script>
-    <script src="fire.js"></script>
+    <script src="./scripts/bounding_box.js"></script>
+    <script src="./scripts/sprite.js"></script>
+    <script src="./scripts/player.js"></script>
+    <script src="./scripts/gem.js"></script>
+    <script src="./scripts/fire.js"></script>
+    <script src="./scripts/ingredients.js"></script>
+
+
     <script>
-        $(function() {
-            /* Get the canvas and 2D context */
-            const cv = $("canvas").get(0);
-            const context = cv.getContext("2d");
-    
-            /* Create the sounds */
-            const sounds = {
-                background: new Audio("background.mp3"),
-                collect: new Audio("collect.mp3"),
-                gameover: new Audio("gameover.mp3")
-            };
-    
-            const totalGameTime = 20;   // Total game time in seconds
-            const gemMaxAge = 3000;     // The maximum age of the gems in milliseconds
-            let gameStartTime = 0;      // The timestamp when the game starts
-            let collectedGems = 0;      // The number of gems collected in the game
-    
-            /* Create the game area */
-            const gameArea = BoundingBox(context, 165, 60, 420, 800);
-            const points = gameArea.getPoints();
-    
-            /* Create the sprites in the game */
-            const player = Player(context, 427, 240, gameArea); // The player
-            const gem = Gem(context, 427, 350, "green");        // The gem
-            const fires = [Fire(context, points.topLeft[0], points.topLeft[1]),
-              Fire(context, points.topRight[0], points.topRight[1]),
-              Fire(context, points.bottomLeft[0], points.bottomLeft[1]),
-              Fire(context, points.bottomRight[0], points.bottomRight[1])]; //The fires
-    
-            /* The main processing of the game */
-            function doFrame(now) {
-                if (gameStartTime == 0) gameStartTime = now;
-    
-                /* Update the time remaining */
-                const gameTimeSoFar = now - gameStartTime;
-                const timeRemaining = Math.ceil((totalGameTime * 1000 - gameTimeSoFar) / 1000);
-                $("#time-remaining").text(timeRemaining);
-    
-    
-                /* TODO */
-                /* Handle the game over situation here */
-                if (timeRemaining == 0) {
-                  $("#final-gems").text(collectedGems);
-                  $("#game-over").show();
-                  sounds.background.pause();
-                  sounds.collect.pause();
-                  sounds.gameover.play();
-                  return;
-                }
-    
-                /* Update the sprites */
-                gem.update(now);
-                player.update(now);
-                fires[0].update(now);
-                fires[1].update(now);
-                fires[2].update(now);
-                fires[3].update(now);
-    
-    
-                /* TODO */
-                /* Randomize the gem and collect the gem here */
-                if (gem.getAge(now) >= gemMaxAge) {
-                  gem.randomize(gameArea);
-                }
-                if (player.getBoundingBox().isPointInBox(gem.getXY().x, gem.getXY().y)) {
-                  sounds.collect.play();
-                  collectedGems += 1;
-                  gem.randomize(gameArea);
-                }
-    
-                /* Clear the screen */
-                context.clearRect(0, 0, cv.width, cv.height);
-    
-                /* Draw the sprites */
-                gem.draw();
-                player.draw();
-                fires[0].draw(now);
-                fires[1].draw(now);
-                fires[2].draw(now);
-                fires[3].draw(now);
-    
-                /* Process the next frame */
-                requestAnimationFrame(doFrame);
-            }
-    
-            /* Handle the start of the game */
-            $("#game-start").on("click", function() {
-                gem.randomize(gameArea);
-                sounds.background.play();
-                /* Hide the start screen */
-                $("#game-start").hide();
-    
-                /* Handle the keydown of arrow keys and spacebar */
-                $(document).on("keydown", function(event) {
-    
-    
-                    /* TODO */
-                    /* Handle the key down */
-                    if (event.keyCode == 37) {
-                      // left
-                      player.move(1);
-                    }
-                    else if (event.keyCode == 38) {
-                      // up
-                      player.move(2);
-                    }
-                    else if (event.keyCode == 39) {
-                      // right
-                      player.move(3);
-                    }
-                    else if (event.keyCode == 40) {
-                      // down
-                      player.move(4);
-                    }
-                    else if (event.keyCode == 32) {
-                      // space
-                      player.speedUp();
-                    }
-                });
-    
-                /* Handle the keyup of arrow keys and spacebar */
-                $(document).on("keyup", function(event) {
-    
-    
-                    /* TODO */
-                    /* Handle the key up */
-                    if (event.keyCode == 37) {
-                      // left
-                      player.stop(1);
-                    }
-                    else if (event.keyCode == 38) {
-                      // up
-                      player.stop(2);
-                    }
-                    else if (event.keyCode == 39) {
-                      // right
-                      player.stop(3);
-                    }
-                    else if (event.keyCode == 40) {
-                      // down
-                      player.stop(4);
-                    }
-                    else if (event.keyCode == 32) {
-                      // space
-                      player.slowDown();
-                    }
-                });
-    
-                /* Start the game */
-                requestAnimationFrame(doFrame);
-            });
+    $(function() {
+        /* Get the canvas and 2D context */
+        const cv = $("canvas").get(0);
+        const context = cv.getContext("2d");
+
+        /* Create the sounds */
+        const sounds = {
+            background: new Audio("./audio/background.mp3"),
+            collect: new Audio("./audio/collect.mp3"),
+            gameover: new Audio("./audio/gameover.mp3")
+        };
+
+        const totalGameTime = 20;   // Total game time in seconds
+        const gemMaxAge = 3000;     // The maximum age of the gems in milliseconds
+        let gameStartTime = 0;      // The timestamp when the game starts
+        let collectedGems = 0;      // The number of gems collected in the game
+
+        /* Create the game area */
+        const gameArea = BoundingBox(context, 100, 100, 550, 550);
+
+        /* Create the sprites in the game */
+        const player = Player(context, 320, 270, gameArea); // The player
+        const gem = Gem(context, 450, 450, "green");        // The gem
+        const fires = [
+            Fire(context, gameArea.getPoints().topLeft[0], gameArea.getPoints().topLeft[1]),
+            Fire(context, gameArea.getPoints().topRight[0], gameArea.getPoints().topRight[1]),
+            Fire(context, gameArea.getPoints().bottomLeft[0], gameArea.getPoints().bottomLeft[1]),
+            Fire(context, gameArea.getPoints().bottomRight[0], gameArea.getPoints().bottomRight[1])
+        ];            
+        let ingredient = [
+            Ingredient(context, 157,385, "water"),
+            Ingredient(context, 157,165, "matchap"),
+            Ingredient(context, 157,285, "milk"),
+            Ingredient(context, 320,385, "choco"),
+            Ingredient(context, 320,155, "lemon"),
+            Ingredient(context, 493,270, "tea"),
+            Ingredient(context, 493,385, "ice"),
+            Ingredient(context, 493,155, "coffee")
+        ];
+
+        $("#blender").on("click", function() {
+        $("#blender").css("animation-name", "blender-animation");
         });
+
+        $("#blender").on("animationend", function() {
+            $("#blender").css("animation-name", "none");
+            ingredient = [
+                Ingredient(context, 157,385, "water"),
+                Ingredient(context, 157,165, "matchap"),
+                Ingredient(context, 157,285, "milk"),
+                Ingredient(context, 320,385, "choco"),
+                Ingredient(context, 320,155, "lemon"),
+                Ingredient(context, 493,270, "tea"),
+                Ingredient(context, 493,385, "ice"),
+                Ingredient(context, 493,155, "coffee")
+            ];
+            for (let i = 0; i < ingredient.length; i++){
+                ingredient[i].draw();
+            }
+            player.calibrate(gameArea); 
+            player.draw();
+        });
+
+        /* The main processing of the game */
+        function doFrame(now) {
+            if (gameStartTime == 0) gameStartTime = now;
+
+            /* Update the time remaining */
+            const gameTimeSoFar = now - gameStartTime;
+            const timeRemaining = Math.ceil((totalGameTime * 1000 - gameTimeSoFar) / 1000);
+            $("#time-remaining").text(timeRemaining);
+
+
+            /* TODO */
+            /* Handle the game over situation here */
+            if(timeRemaining <= 0  ){
+                $("#final-gems").text(collectedGems);
+                $("#game-over").show();
+                sounds.background.pause();
+                sounds.collect.pause();
+                sounds.gameover.play();
+                return; //stop the animation(doFrame()) loop
+            }
+
+            /* Update the sprites */
+            gem.update(now);
+            player.update(now);
+            for (let i = 0; i < fires.length; i++){
+                fires[i].update(now);
+            };
+            for (let i = 0; i < ingredient.length; i++){
+                if(ingredient[i]!=0)ingredient[i].update(now);
+            }
+
+
+            /* TODO */
+            /* Randomize the gem and collect the gem here */
+            // if(gem.getAge(now) > gemMaxAge){
+            //     gem.randomize(gameArea);
+            // }
+
+            // const {x,y} = gem.getXY();
+            // if(player.getBoundingBox().isPointInBox(x,y)){ 
+            //     collectedGems++;
+            //     gem.randomize(gameArea);
+            //     sounds.collect.pause();
+            //     sounds.collect.currentTime = 0;
+            //     sounds.collect.play();
+            // }
+
+            // if(ingredient.length > 0){
+            //     const {x,y} = ingredient[0].getXY();
+            //     if(player.getBoundingBox().isPointInBox(x,y)){ 
+            //         collectedGems++;
+            //         //gem.randomize(gameArea);
+            //         sounds.collect.pause();
+            //         sounds.collect.currentTime = 0;
+            //         sounds.collect.play();
+            //         ingredient.splice(0,1)
+            //     }
+            // }
+
+            for (let i = 0; i < ingredient.length; i++){
+                if(ingredient[i]!= 0){
+                    const {x,y}= ingredient[i].getXY();
+                    if(player.getBoundingBox().isPointInBox(x,y)){ //checking if player takes ingredients
+                        collectedGems++;
+                        sounds.collect.pause();
+                        sounds.collect.currentTime = 0;
+                        sounds.collect.play();
+                        ingredient[i] = 0;
+
+                    }
+                }
+            }
+            
+            
+             
+            
+
+            // let coordinates = [];
+            // for (let i = 0; i < ingredient.length; i++){
+            //     if(ingredient[i] != 0){
+            //         const {x,y} = ingredient[0].getXY();
+            //         coordinates.append({x,y});
+            //         for(let i = 0; i < coordinates.length; i++){
+            //             if
+            //         }
+            //     }
+            // }
+
+            /* Clear the screen */
+            context.clearRect(0, 0, cv.width, cv.height);
+
+            /* Draw the sprites */
+            //gem.draw();
+            player.draw();
+            for (let i = 0; i < fires.length; i++){
+                fires[i].draw();
+            }
+            for (let i = 0; i < ingredient.length; i++){
+                if(ingredient[i]!=0)ingredient[i].draw();
+            }
+                
+            /* Process the next frame */
+            requestAnimationFrame(doFrame);
+        }
+
+        /* Handle the start of the game */
+        $("#game-start").on("click", function() {
+            /* Hide the start screen */
+            sounds.background.play();
+            $("#game-start").hide();
+
+            /* Handle the keydown of arrow keys and spacebar */
+            $(document).on("keydown", function(event) { //triggered when you press down a key 
+
+
+                /* TODO */
+                /* Handle the key down */
+                switch(event.keyCode){
+                    case(37): //left
+                        player.move(1); 
+                        break;
+                    case(38): //up
+                        player.move(2);
+                        break;
+                    case(39): //right
+                        player.move(3);
+                        break;
+                    case(40): //down
+                        player.move(4);
+                        break;
+                    case(32): //spacebar
+                        player.speedUp();
+                        break;
+                };
+
+            });
+
+            /* Handle the keyup of arrow keys and spacebar */
+            $(document).on("keyup", function(event) { //triggered when you release a key 
+
+
+                /* TODO */
+                /* Handle the key up */
+                switch(event.keyCode){
+                    case(37): //left
+                        player.stop(1); 
+                        break;
+                    case(38): //up
+                        player.stop(2);
+                        break;
+                    case(39): //right
+                        player.stop(3);
+                        break;
+                    case(40): //down
+                        player.stop(4);
+                        break;
+                    case(32): //spacebar
+                        player.slowDown();
+                        break;
+                };
+
+            });
+
+            /* Start the game */
+            //gem.randomize(gameArea);
+            requestAnimationFrame(doFrame);
+        });
+    });
     </script>
-    <script>
+
+
+<!-- SIGN IN PART -->
+<script>
     $(function() {
         // Initialize the UI
         UI.initialize();
@@ -308,5 +427,7 @@
         );
     });
     </script>
+
+<!-- SIGN IN PART END -->
 </body>
 </html>
