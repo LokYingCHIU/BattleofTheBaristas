@@ -66,6 +66,16 @@ const Socket = (function() {
             typerField.displayTyper(typingUser);
             //setTimeout(()=>{$("#typing-text").hide()}, 3000);
         });
+
+        // Set up the is correct drink event
+        socket.on("is correct drink", () => {
+            
+        });
+
+        // Set up the is wrong drink event
+        socket.on("is wrong drink", () => {
+            
+        });
     };
 
     // This function disconnects the socket from the server
@@ -83,9 +93,13 @@ const Socket = (function() {
 
     // This function sends a typing event to the server
     const isTyping = function(typingUser) {
-        //typingUser = JSON.parse(typingUser);
         socket.emit("typingAlert", typingUser);
     };
+
+    // This function sends a check drink event to the server
+    const checkDrink = function(drinkName, playerRecipe) {
+        socket.emit("check drink", drinkName, playerRecipe);
+    }
 
     return { getSocket, connect, disconnect, postMessage, isTyping };
 })();
