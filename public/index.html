@@ -195,6 +195,8 @@
         const gameArea = BoundingBox(context, 100, 100, 550, 550);
 
         /* Create the sprites in the game */
+        const drinks = []; 
+
         const player = Player(context, 320, 270, gameArea); // The player
         const gem = Gem(context, 450, 450, "green");        // The gem
         const fires = [
@@ -269,32 +271,7 @@
             }
 
 
-            /* TODO */
-            /* Randomize the gem and collect the gem here */
-            // if(gem.getAge(now) > gemMaxAge){
-            //     gem.randomize(gameArea);
-            // }
 
-            // const {x,y} = gem.getXY();
-            // if(player.getBoundingBox().isPointInBox(x,y)){ 
-            //     collectedGems++;
-            //     gem.randomize(gameArea);
-            //     sounds.collect.pause();
-            //     sounds.collect.currentTime = 0;
-            //     sounds.collect.play();
-            // }
-
-            // if(ingredient.length > 0){
-            //     const {x,y} = ingredient[0].getXY();
-            //     if(player.getBoundingBox().isPointInBox(x,y)){ 
-            //         collectedGems++;
-            //         //gem.randomize(gameArea);
-            //         sounds.collect.pause();
-            //         sounds.collect.currentTime = 0;
-            //         sounds.collect.play();
-            //         ingredient.splice(0,1)
-            //     }
-            // }
 
             for (let i = 0; i < ingredient.length; i++){
                 if(ingredient[i]!= 0){
@@ -309,21 +286,7 @@
                     }
                 }
             }
-            
-            
-             
-            
 
-            // let coordinates = [];
-            // for (let i = 0; i < ingredient.length; i++){
-            //     if(ingredient[i] != 0){
-            //         const {x,y} = ingredient[0].getXY();
-            //         coordinates.append({x,y});
-            //         for(let i = 0; i < coordinates.length; i++){
-            //             if
-            //         }
-            //     }
-            // }
 
             /* Clear the screen */
             context.clearRect(0, 0, cv.width, cv.height);
