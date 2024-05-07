@@ -201,8 +201,9 @@
         const gameArea = BoundingBox(context, 100, 100, 550, 550);
 
         /* Create the sprites in the game */
-        const drinks = ["matcha", "latte", "chocmilk", "mocha", "milkshake","lemonade", "milktea"]; 
-        const inblender = [];
+        const drinks = ["matcha", "latte", "choco-milk", "mocha", "milkshake","lemonade", "milk-tea"]; 
+        let inblender = [];
+        let cur_drink = "";
 
         const player = Player(context, 320, 270, gameArea); // The player
         const gem = Gem(context, 450, 450, "green");        // The gem
@@ -223,9 +224,9 @@
             Ingredient(context, 493,155, "coffee")
         ];
 
+
         $("#blender").on("click", function() {
-            Socket.checkDrink("matcha", inblender);
-            
+            Socket.checkDrink(cur_drink, inblender);
             $("#blender").css("animation-name", "blender-animation");
         });
 
@@ -281,45 +282,35 @@
             }
 
             for (let i = 0; i < ingredient.length; i++){
-                if(ingredient[i]!= 0){
+                if(ingredient[i]!= 0){ //only for ingredients not selected
                     const {x,y}= ingredient[i].getXY();
+
                     if(player.getBoundingBox().isPointInBox(x,y)){ //checking if player takes ingredients
                         collectedGems++;
                         sounds.collect.pause();
                         sounds.collect.currentTime = 0;
                         sounds.collect.play();
                         ingredient[i] = 0;
-
-
-                switch(x,y){ //Adding selected ingredients to inblender array
-                    case(157,385): 
-                        inblender.push("water"); 
-                        break;
-                    case(157,165): 
-                        inblender.push("matchap"); 
-                        break;
-                    case(157,285): 
-                        inblender.push("milk"); 
-                        break;
-                    case(320, 385): 
-                        inblender.push("choco"); 
-                        break;
-                    case(320,155): 
-                        inblender.push("lemon"); 
-                        break;
-                    case(493,270): 
-                        inblender.push("tea"); 
-                        break;
-                    case(493,385): 
-                        inblender.push("ice"); 
-                        break;
-                    case(493,155): 
-                        inblender.push("coffee"); 
-                        break;
-                };
+                    
+                        if(x==157 && y==385)inblender.push("water");
+                        else if(x==157 && y==385)inblender.push("matchap");
+                        else if(x==157 && y==285)inblender.push("milk");
+                        else if(x==320 && y==385)inblender.push("choco");
+                        else if(x==320 && y==155)inblender.push("lemon");
+                        else if(x==493 && y==270)inblender.push("tea");
+                        else if(x==493 && y==385)inblender.push("ice");
+                        else if(x==493 && y==155)inblender.push("coffee");
                     }
                 }
             }
+
+            // const {x1,y1}= ingredient[1].getXY();
+            //         const {x2,y2}= ingredient[2].getXY();
+            //         const {x3,y3}= ingredient[3].getXY();
+            //         const {x4,y4}= ingredient[4].getXY();
+            //         const {x5,y15}= ingredient[5].getXY();
+            //         const {x1,y1}= ingredient[6].getXY();
+            //         const {x1,y1}= ingredient[7].getXY();
 
 
             /* Clear the screen */
@@ -399,8 +390,8 @@
 
             /* Start the game */
             //gem.randomize(gameArea);
-            const order = drinks[Math.floor(Math.random() * 7)];//randomize drink order
-            $("#ordered-item").text(order);
+            cur_drink = drinks[Math.floor(Math.random() * 7)];//randomize drink order
+            $("#ordered-item").text(cur_drink);
             requestAnimationFrame(doFrame);
         });
     });
