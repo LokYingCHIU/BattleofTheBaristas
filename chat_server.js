@@ -98,7 +98,6 @@ app.post("/signin", (req, res) => {
         return;
     }
 
-    //console.log(users[username].hash)
     if (!bcrypt.compareSync(password, users[username].password)) {
         /* Passwords are not the same */
         res.json({
@@ -181,6 +180,20 @@ io.on("connection", (socket) => {
         io.emit("add user", JSON.stringify(user));
     }
 
+    socket.on("check drink", (drinkname, userrecipe) =>{ 
+        // drinkname: string of the assigned drink name
+        // userrecipe: array of strings of the ingredients submit by the player
+        const recipes = JSON.parse(fs.readFileSync("./data/recipe.json")); 
+        const correct_recipe = recipes[drinkname];
+        if (correct_recipe == userrecipe) {
+            io.emit("is correct drink");
+        }
+        else {
+            io.emit("is wrong drink");
+        }
+        
+    });
+
     socket.on("disconnect", () => {
         // Remove the user from the online user list
         if(socket.request.session.user){
@@ -190,7 +203,6 @@ io.on("connection", (socket) => {
                 delete onlineUserList[username];
             }  
             io.emit("remove user", JSON.stringify(user));
-            //io.emit("users", JSON.stringify(onlineUserList));
         }
     });
 
@@ -245,7 +257,6 @@ io.on("connection", (socket) => {
 });
 
 // Use a web server to listen at port 8000
-//app.listen(8000, () => {
 httpServer.listen(8000, () => {
     console.log("The chat server has started...");
 });
