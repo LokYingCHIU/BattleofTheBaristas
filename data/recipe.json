@@ -15,7 +15,7 @@
         "ingredients": ["ice", "milk"]
     },
     "lemonade": {
-        "ingredients": ["lemon", "tea"]
+        "ingredients": ["lemon", "water"]
     },
     "milk-tea": {
         "ingredients": ["milk", "tea"]

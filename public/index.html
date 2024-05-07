@@ -14,7 +14,7 @@
     #game-container {
         position: relative;
     }
-    canvas, #counter, #game-start, #game-over, #order, #points1, #points2{
+    canvas, #counter, #game-start, #game-over, #order, #points1, #points2, #result-box{
         position: absolute;
         top: 0px;
         left: 0px;
@@ -95,6 +95,12 @@
         <svg xmlns="http://www.w3.org/2000/svg" id="points2">
             <text x="10" y="80">
                 PLAYER 2: <tspan id="points_p2">0</tspan>
+            </text>
+        </svg>
+
+        <svg xmlns="http://www.w3.org/2000/svg" id="result-box">
+            <text x="10" y="100">
+                RESULT: <tspan id="result">???</tspan>
             </text>
         </svg>
 
@@ -285,8 +291,8 @@
             /* TODO */
             /* Handle the game over situation here */
             if(timeRemaining <= 0  ){
-                $("#score-player1").text(collectedGems_p1);
-                $("#score-player2").text(collectedGems_p2);
+                $("#final-score-player1").text(points_p1);
+                $("#final-score-player2").text(points_p2);
                 $("#game-over").show();
                 sounds.background.pause();
                 sounds.collect.pause();
