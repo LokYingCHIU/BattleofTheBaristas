@@ -314,7 +314,6 @@
                     const {x,y}= ingredient[i].getXY();
 
                     if(player.getBoundingBox().isPointInBox(x,y)){ //checking if player takes ingredients
-                        // collectedGems_p1++;
                         sounds.collect.pause();
                         sounds.collect.currentTime = 0;
                         sounds.collect.play();
@@ -331,14 +330,6 @@
                     }
                 }
             }
-
-            // const {x1,y1}= ingredient[1].getXY();
-            //         const {x2,y2}= ingredient[2].getXY();
-            //         const {x3,y3}= ingredient[3].getXY();
-            //         const {x4,y4}= ingredient[4].getXY();
-            //         const {x5,y15}= ingredient[5].getXY();
-            //         const {x1,y1}= ingredient[6].getXY();
-            //         const {x1,y1}= ingredient[7].getXY();
 
 
             /* Clear the screen */
