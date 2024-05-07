@@ -67,16 +67,6 @@ const Socket = (function() {
             //setTimeout(()=>{$("#typing-text").hide()}, 3000);
         });
 
-<<<<<<< HEAD
-        // Set up the is correct drink event
-        socket.on("is correct drink", () => {
-            
-        });
-
-        // Set up the is wrong drink event
-        socket.on("is wrong drink", () => {
-            
-=======
         //Set up the posting check drink result event
         socket.on("post check result", (player, drinkName, result) => {
             // console.log("player: ", player, ", drink name: ", drinkName, ", post check result: ", result);
@@ -86,7 +76,6 @@ const Socket = (function() {
             else {
                 $("#result").text("fail");
             }
->>>>>>> game-page
         });
     };
 
@@ -108,19 +97,10 @@ const Socket = (function() {
         socket.emit("typingAlert", typingUser);
     };
 
-<<<<<<< HEAD
-    // This function sends a check drink event to the server
-    const checkDrink = function(drinkName, playerRecipe) {
-        socket.emit("check drink", drinkName, playerRecipe);
-    }
-
-    return { getSocket, connect, disconnect, postMessage, isTyping };
-=======
     // This function sends a check event to the server
     const checkDrink = function(drinkName, playerRecipe) {
         socket.emit("check drink", drinkName, playerRecipe);
     };
 
     return { getSocket, connect, disconnect, postMessage, isTyping, checkDrink };
->>>>>>> game-page
 })();
