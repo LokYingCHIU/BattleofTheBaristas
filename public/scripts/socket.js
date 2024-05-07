@@ -64,18 +64,23 @@ const Socket = (function() {
         socket.on("typingAlert", (typingUser) => {
             typingUser = JSON.parse(typingUser);
             typerField.displayTyper(typingUser);
-            //setTimeout(()=>{$("#typing-text").hide()}, 3000);
         });
 
         //Set up the posting check drink result event
         socket.on("post check result", (player, drinkName, result) => {
-            // console.log("player: ", player, ", drink name: ", drinkName, ", post check result: ", result);
+            console.log("player: ", player, ", drink name: ", drinkName, ", post check result: ", result);
+            const you = Authentication.getUser();
             if (result==="success") {
-                $("#result").text("success");
+                if (JSON.stringify(you) === JSON.stringify(player)) { // you got a point
+                    const currentNumber = parseInt($("#points_s").text());
+                    $("#points_s").text(currentNumber + 1);
+                }
+                else { // the opponent got a point
+                    const currentNumber = parseInt($("#points_o").text());
+                    $("#points_o").text(currentNumber + 1);
+                }
             }
-            else {
-                $("#result").text("fail");
-            }
+            // if the result is not success, do nothing
         });
     };
 

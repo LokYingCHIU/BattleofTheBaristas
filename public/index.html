@@ -14,7 +14,7 @@
     #game-container {
         position: relative;
     }
-    canvas, #counter, #game-start, #game-over, #order, #points1, #points2, #result-box{
+    canvas, #counter, #game-start, #game-over, #order, #points_self, #points_oppo{
         position: absolute;
         top: 0px;
         left: 0px;
@@ -86,23 +86,23 @@
             </text>
         </svg>
 
-        <svg xmlns="http://www.w3.org/2000/svg" id="points1">
+        <svg xmlns="http://www.w3.org/2000/svg" id="points_self">
             <text x="10" y="60">
-                PLAYER 1: <tspan id="points_p1">0</tspan>
+                YOU: <tspan id="points_s">0</tspan>
             </text>
         </svg>
 
-        <svg xmlns="http://www.w3.org/2000/svg" id="points2">
+        <svg xmlns="http://www.w3.org/2000/svg" id="points_oppo">
             <text x="10" y="80">
-                PLAYER 2: <tspan id="points_p2">0</tspan>
+                OPPONENT: <tspan id="points_o">0</tspan>
             </text>
         </svg>
 
-        <svg xmlns="http://www.w3.org/2000/svg" id="result-box">
+        <!-- <svg xmlns="http://www.w3.org/2000/svg" id="result-box">
             <text x="10" y="100">
                 RESULT: <tspan id="result">???</tspan>
             </text>
-        </svg>
+        </svg> -->
 
         <svg xmlns="http://www.w3.org/2000/svg" id="game-start">
             <defs>
@@ -221,8 +221,8 @@
         const totalGameTime = 20;   // Total game time in seconds
         const gemMaxAge = 3000;     // The maximum age of the gems in milliseconds
         let gameStartTime = 0;      // The timestamp when the game starts
-        let points_p1 = 0;      // The number of gems collected in the game for player1
-        let points_p2 = 0;       // The number of gems collected in the game for player2
+        // let points_s = 0;      // The number of gems collected in the game for player1
+        // let points_o = 0;       // The number of gems collected in the game for player2
 
         /* Create the game area */
         const gameArea = BoundingBox(context, 100, 100, 550, 550);
@@ -290,8 +290,8 @@
             /* TODO */
             /* Handle the game over situation here */
             if(timeRemaining <= 0  ){
-                $("#final-score-player1").text(points_p1);
-                $("#final-score-player2").text(points_p2);
+                $("#final-score-player1").text($("#points_s").text());
+                $("#final-score-player2").text($("#points_o").text());
                 $("#game-over").show();
                 sounds.background.pause();
                 sounds.collect.pause();

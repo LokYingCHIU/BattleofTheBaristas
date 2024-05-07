@@ -180,20 +180,6 @@ io.on("connection", (socket) => {
         io.emit("add user", JSON.stringify(user));
     }
 
-    socket.on("check drink", (drinkname, userrecipe) =>{ 
-        // drinkname: string of the assigned drink name
-        // userrecipe: array of strings of the ingredients submit by the player
-        const recipes = JSON.parse(fs.readFileSync("./data/recipe.json")); 
-        const correct_recipe = recipes[drinkname];
-        if (correct_recipe == userrecipe) {
-            io.emit("is correct drink");
-        }
-        else {
-            io.emit("is wrong drink");
-        }
-        
-    });
-
     socket.on("disconnect", () => {
         // Remove the user from the online user list
         if(socket.request.session.user){
