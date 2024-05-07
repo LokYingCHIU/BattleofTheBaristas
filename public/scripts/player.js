@@ -117,6 +117,7 @@ const Player = function(ctx, x, y, gameArea) {
         getBoundingBox: sprite.getBoundingBox,
         draw: sprite.draw,
         update: update,
-        calibrate: calibrate
+        calibrate: calibrate,
+        getXY: sprite.getXY,
     };
 };
