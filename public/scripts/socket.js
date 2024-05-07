@@ -13,6 +13,7 @@ const Socket = (function() {
 
         // Wait for the socket to connect successfully
         socket.on("connect", () => {
+
             // Get the online user list
             socket.emit("get users");
 
@@ -69,8 +70,12 @@ const Socket = (function() {
 
         //Set up the posting check drink result event
         socket.on("post check result", (player, drinkName, result) => {
-            // console.log("player: ", player, ", drink name: ", drinkName, ", post check result: ", result);
             if (result==="success") {
+                
+                var currentNumber = parseInt(resultElement.text());
+                var newNumber = currentNumber + 1;
+                resultElement.text(newNumber);
+
                 $("#result").text("success");
             }
             else {
