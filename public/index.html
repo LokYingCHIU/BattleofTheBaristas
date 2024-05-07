@@ -14,7 +14,7 @@
     #game-container {
         position: relative;
     }
-    canvas, #counter, #game-start, #game-over, #order{
+    canvas, #counter, #game-start, #game-over, #order, #points1, #points2{
         position: absolute;
         top: 0px;
         left: 0px;
@@ -82,7 +82,19 @@
 
         <svg xmlns="http://www.w3.org/2000/svg" id="order">
             <text x="170" y="35">
-                ORDER:<tspan id="ordered-item">matcha</tspan>
+                ORDER: <tspan id="ordered-item">matcha</tspan>
+            </text>
+        </svg>
+
+        <svg xmlns="http://www.w3.org/2000/svg" id="points1">
+            <text x="10" y="60">
+                PLAYER 1: <tspan id="points_p1">0</tspan>
+            </text>
+        </svg>
+
+        <svg xmlns="http://www.w3.org/2000/svg" id="points2">
+            <text x="10" y="80">
+                PLAYER 2: <tspan id="points_p2">0</tspan>
             </text>
         </svg>
 
@@ -100,6 +112,7 @@
         </svg>
 
         <svg xmlns="http://www.w3.org/2000/svg" id="game-over" style="display: none">
+        <!-- <svg xmlns="http://www.w3.org/2000/svg" id="game-over"> -->
             <defs>
                 <linearGradient id="game-over-fill" x1="0" y1="0" x2="0" y2="1">
                     <stop offset="0" stop-color="red" />
@@ -107,9 +120,17 @@
                     <stop offset="1" stop-color="red" />
                 </linearGradient>
             </defs>
+            <text x="50%" y="40%">
+                Time's up!
+            </text>
+            <text x="50%" y="45%">
+                Player1 (you) have collected
+                <tspan id="final-score-player1">0</tspan>
+                gem(s).
+            </text>
             <text x="50%" y="50%">
-                Time's up! You have collected
-                <tspan id="final-gems">0</tspan>
+                Player2 have collected
+                <tspan id="final-score-player2">0</tspan>
                 gem(s).
             </text>
         </svg>
@@ -195,7 +216,8 @@
         const totalGameTime = 20;   // Total game time in seconds
         const gemMaxAge = 3000;     // The maximum age of the gems in milliseconds
         let gameStartTime = 0;      // The timestamp when the game starts
-        let collectedGems = 0;      // The number of gems collected in the game
+        let points_p1 = 0;      // The number of gems collected in the game for player1
+        let points_p2 = 0;       // The number of gems collected in the game for player2
 
         /* Create the game area */
         const gameArea = BoundingBox(context, 100, 100, 550, 550);
@@ -262,7 +284,8 @@
             /* TODO */
             /* Handle the game over situation here */
             if(timeRemaining <= 0  ){
-                $("#final-gems").text(collectedGems);
+                $("#score-player1").text(collectedGems_p1);
+                $("#score-player2").text(collectedGems_p2);
                 $("#game-over").show();
                 sounds.background.pause();
                 sounds.collect.pause();
@@ -284,7 +307,7 @@
                 if(ingredient[i]!= 0){
                     const {x,y}= ingredient[i].getXY();
                     if(player.getBoundingBox().isPointInBox(x,y)){ //checking if player takes ingredients
-                        collectedGems++;
+                        // collectedGems_p1++;
                         sounds.collect.pause();
                         sounds.collect.currentTime = 0;
                         sounds.collect.play();

@@ -76,8 +76,6 @@ app.post("/register", (req, res) => {
     // I. Sending a success response to the browser
     //
     res.json({status: "success"}); return;
-    // Delete when appropriate
-    //res.json({ status: "error", error: "This endpoint is not yet implemented." });
 });
 
 // Handle the /signin endpoint
@@ -119,8 +117,6 @@ app.post("/signin", (req, res) => {
     //res.json({status: "success", user:_user}); 
     res.json({status: "success", user:_user});
     return;
-    // Delete when appropriate
-    res.json({ status: "error", error: "This endpoint is not yet implemented." }); 
 });
 
 // Handle the /validate endpoint
@@ -230,15 +226,18 @@ io.on("connection", (socket) => {
     });
 
     socket.on("check drink", (drinkname, playerrecipe) =>{ 
-        // drinkname: string of the assigned drink name
-        // userrecipe: array of strings of the ingredients submit by the player
+        // input:
+        //  drinkname: string of the assigned drink name
+        //  userrecipe: array of strings of the ingredients submit by the player
+        // tell the client the check result and the player's name
+        const user = socket.request.session.user;
         const recipes = JSON.parse(fs.readFileSync("./data/recipe.json")); 
         const correct_recipe = recipes[drinkname].ingredients;
         if (JSON.stringify(correct_recipe) === JSON.stringify(playerrecipe.sort())) {
-            io.emit("post check result", "success");
+            io.emit("post check result", user, drinkname, "success");
         }
         else {
-            io.emit("post check result", "fail");
+            io.emit("post check result", user, drinkname, "fail");
         }
     });
 });

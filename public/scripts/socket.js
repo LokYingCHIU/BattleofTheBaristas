@@ -68,8 +68,14 @@ const Socket = (function() {
         });
 
         //Set up the posting check drink result event
-        socket.on("post check result", (result) => {
-            console.log(result);
+        socket.on("post check result", (player, drinkName, result) => {
+            console.log("player: ", player, ", drink name: ", drinkName, ", post check result: ", result);
+            if (result==="success") {
+                
+            }
+            else {
+                console.log("fail");
+            }
         });
     };
 
