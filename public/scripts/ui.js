@@ -169,9 +169,18 @@ const OnlineUsersPanel = (function() {
 		// Remove the user
         if (userDiv.length > 0) userDiv.remove();
         console.log(user)
+    };
+    
+    const countUser = function() {
+        const onlineUsersArea = $("#online-users-area");
+		
+		// Find the user
+		const userDiv = onlineUsersArea.find("#username-" );
+		// Remove the user
+        return userDiv.length > 1;
 	};
 
-    return { initialize, update, addUser, removeUser };
+    return { initialize, update, addUser, removeUser, countUser };
 })();
 
 const ChatPanel = (function() {
@@ -272,3 +281,5 @@ const typerField = (function() {
 
     return {displayTyper};
 })();
+
+
