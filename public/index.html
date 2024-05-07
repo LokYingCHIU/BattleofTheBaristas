@@ -355,10 +355,27 @@
         }
 
         /* Handle the start of the game */
-        $("#game-start").on("click", function() {
+        // $("#game-start").on("hide", function() {
+            if( $("#game-start").visibility === "hidden"){
+
+            // document.getElementById("game-start").addEventListener("hide", function(e) {
             /* Hide the start screen */
+            // if(OnlineUsersPanel.countUser()){
+            //     sounds.background.play();
+            //     $("#game-start").hide();
+            //     cur_drink = drinks[Math.floor(Math.random() * 7)];//randomize drink order
+            //     $("#ordered-item").text(cur_drink);
+            //     requestAnimationFrame(doFrame);
+            // }
+            // console.log(e);
+            console.log("trigereeeeeeeeed");
             sounds.background.play();
-            $("#game-start").hide();
+            // $("#game-start").hide();
+            cur_drink = drinks[Math.floor(Math.random() * 7)];//randomize drink order
+            $("#ordered-item").text(cur_drink);
+            requestAnimationFrame(doFrame);
+            
+            
 
             /* Handle the keydown of arrow keys and spacebar */
             $(document).on("keydown", function(event) { //triggered when you press down a key 
@@ -414,10 +431,10 @@
 
             /* Start the game */
             //gem.randomize(gameArea);
-            cur_drink = drinks[Math.floor(Math.random() * 7)];//randomize drink order
-            $("#ordered-item").text(cur_drink);
-            requestAnimationFrame(doFrame);
-        });
+            // cur_drink = drinks[Math.floor(Math.random() * 7)];//randomize drink order
+            // $("#ordered-item").text(cur_drink);
+            // requestAnimationFrame(doFrame);
+        };
     });
 
     </script>

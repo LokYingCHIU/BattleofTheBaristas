@@ -68,6 +68,21 @@ const Socket = (function() {
             //setTimeout(()=>{$("#typing-text").hide()}, 3000);
         });
 
+        socket.on("game started", (typingUser) => {
+            // console.log("socket activated!!!!!!!!!");
+            
+            // $("#game-title").text("hello");
+            // console.log("it shouldbe hidden");
+
+            try{
+                $("#game-start").hide();
+            }
+            catch(err){
+                console.log("the game start hide is errorr!!!!!!!!")
+            }
+            
+    });
+
         //Set up the posting check drink result event
         socket.on("post check result", (player, drinkName, result) => {
             if (result==="success") {
@@ -107,5 +122,10 @@ const Socket = (function() {
         socket.emit("check drink", drinkName, playerRecipe);
     };
 
-    return { getSocket, connect, disconnect, postMessage, isTyping, checkDrink };
+    const checkUserCount = function() {
+        //if(OnlineUsersPanel.countUser())
+        socket.emit("start game");
+        };
+
+    return { getSocket, connect, disconnect, postMessage, isTyping, checkDrink, checkUserCount };
 })();
