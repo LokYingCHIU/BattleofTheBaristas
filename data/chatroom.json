@@ -1,0 +1,29 @@
+[
+ {
+  "user": {
+   "username": "tony",
+   "avatar": "Owl",
+   "name": "Tony Lee"
+  },
+  "datetime": "2022-01-01T01:00:00.000Z",
+  "content": "Hi, welcome to the chatroom!"
+ },
+ {
+  "user": {
+   "username": "user 1",
+   "avatar": "Panda",
+   "name": "Theo James"
+  },
+  "datetime": "2024-04-20T05:57:28.033Z",
+  "content": "chat"
+ },
+ {
+  "user": {
+   "username": "user 2",
+   "avatar": "Rabbit",
+   "name": "Pearl River"
+  },
+  "datetime": "2024-04-20T05:57:31.495Z",
+  "content": "room"
+ }
+]
