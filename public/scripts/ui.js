@@ -168,7 +168,6 @@ const OnlineUsersPanel = (function() {
 		const userDiv = onlineUsersArea.find("#username-" + user.username);
 		// Remove the user
         if (userDiv.length > 0) userDiv.remove();
-        console.log(user)
 	};
 
     return { initialize, update, addUser, removeUser };
@@ -203,6 +202,11 @@ const ChatPanel = (function() {
             const typingUser = Authentication.getUser();
             Socket.isTyping(typingUser);
         });
+
+	$("#game-start").on("click", () => {
+            Socket.checkUserCount();
+        });
+
  	};
 
     // This function updates the chatroom area
