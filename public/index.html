@@ -15,6 +15,11 @@
     #game-container {
         position: relative;
     }
+
+    #start-button {
+        position: absolute;
+    }
+        
     canvas, #counter, #game-start, #game-over, #order, #points_self, #points_oppo{
         position: absolute;
         top: 0px;
@@ -147,6 +152,13 @@
                 </path>
             </g>
         </svg>
+    </div>
+    <div id="online-users-panel" class="col">
+        <div id="online-users-area" class="col"></div>
+    </div>
+
+    <div id="button-start" class = "button">
+        <button id="start-button" style="display: none;">Start!</button>
     </div>
 
     <!-- SIGN IN PART -->
@@ -345,10 +357,11 @@
         }
 
         /* Handle the start of the game */
-        $("#game-start").on("click", function() {
-            /* Hide the start screen */
+        $("#start-button").on("click", function() {
             sounds.background.play();
-            $("#game-start").hide();
+            cur_drink = drinks[Math.floor(Math.random() * 7)];//randomize drink order
+            $("#ordered-item").text(cur_drink);
+            requestAnimationFrame(doFrame);
 
             /* Handle the keydown of arrow keys and spacebar */
             $(document).on("keydown", function(event) { //triggered when you press down a key 
@@ -404,9 +417,9 @@
 
             /* Start the game */
             //gem.randomize(gameArea);
-            cur_drink = drinks[Math.floor(Math.random() * 7)];//randomize drink order
-            $("#ordered-item").text(cur_drink);
-            requestAnimationFrame(doFrame);
+            // cur_drink = drinks[Math.floor(Math.random() * 7)];//randomize drink order
+            // $("#ordered-item").text(cur_drink);
+            // requestAnimationFrame(doFrame);
         });
     });
 
