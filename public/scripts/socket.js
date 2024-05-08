@@ -72,7 +72,7 @@ const Socket = (function() {
         });
 
         socket.on("stop game", () => {
-            $("#game-start").show();
+            $("#game-over").show();
         });
 
         //Set up the posting check drink result event
