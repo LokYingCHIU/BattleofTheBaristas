@@ -231,6 +231,7 @@ io.on("connection", (socket) => {
         const user = socket.request.session.user;
         const recipes = JSON.parse(fs.readFileSync("./data/recipe.json")); 
         const correct_recipe = recipes[drinkname].ingredients;
+        // console.log("correct: ", JSON.stringify(correct_recipe), ", player: ", JSON.stringify(playerrecipe.sort()))
         if (JSON.stringify(correct_recipe) === JSON.stringify(playerrecipe.sort())) {
             // console.log("post check result, username: ", user, ", drinkname:, ", drinkname, ", success")
             io.emit("post check result", user, drinkname, "success");
