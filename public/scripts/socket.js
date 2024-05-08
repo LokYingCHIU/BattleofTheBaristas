@@ -79,6 +79,7 @@ const Socket = (function() {
         socket.on("post check result", (player, drinkName, result) => {
             console.log("player: ", player, ", drink name: ", drinkName, ", post check result: ", result);
             const you = Authentication.getUser();
+            console.log("you: ", JSON.stringify(you), ", player: ", JSON.stringify(player));
             if (result==="success") {
                 if (JSON.stringify(you) === JSON.stringify(player)) { // you got a point
                     const currentNumber = parseInt($("#points_s").text());
