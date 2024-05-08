@@ -68,14 +68,11 @@ const Socket = (function() {
 
         socket.on("game started", () => {
             $("#game-start").hide();
-            $("#start-button").show();
-            
+            startGame();
         });
 
         socket.on("stop game", () => {
             $("#game-start").show();
-            $("#start-button").hide();
-            
         });
 
         //Set up the posting check drink result event

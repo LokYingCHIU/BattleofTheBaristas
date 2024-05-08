@@ -15,9 +15,6 @@
     #game-container {
         position: relative;
     }
-    #start-button {
-        position: absolute;
-    }
     canvas, #counter, #game-start, #game-over, #order, #points_self, #points_oppo, #hint-box{
         position: absolute;
         top: 0px;
@@ -130,9 +127,12 @@
                     <text x="50%" y="40%">Get ready to showcase your barista skills in this fast-paced competition.</text>
                     <text x="50%" y="45%">Can you handle the pressure and fulfill drink orders like a true professional?</text>
                     <text x="50%" y="50%">Each session lasts for 4 minutes, during which you will compete with another player.</text>
-                    <text x="50%" y="55%">Fulfill Drink Orders: Your goal is to fulfill as many drink orders as you can within the given time.</text>
-                    <text x="50%" y="60%">You can get hints of how to make the drink by hitting the space bar. You will have maximum three hints in one game.</text>
-                    <text x="50%" y="65%">Every correct drink you make earns you 1 point. The player with the highest score at the end of the session will be declared the winner.</text>
+                    <text x="50%" y="50%"></text>
+                    <text x="50%" y="55%">How to play: Your goal is to fulfill as many drink orders as you can within the given time.</text>
+                    <text x="50%" y="60%">You can get hints of how to make the drink by hitting the space bar.</text>
+                    <text x="50%" y="65%">You will have maximum three hints in one game.</text>
+                    <text x="50%" y="70%">Every correct drink you make earns you 1 point.</text>
+                    <text x="50%" y="75%">The player with the highest score at the end of the session will be declared the winner.</text>
                 </g>
 
             </svg>
@@ -174,10 +174,6 @@
         </div>
         <div id="online-users-panel" class="col">
             <div id="online-users-area" class="col"></div>
-        </div>
-    
-        <div id="button-start" class = "button">
-            <button id="start-button" style="display: none;">Start!</button>
         </div>
     </div>
 
@@ -236,7 +232,7 @@
     const drinks = ["matcha", "latte", "choco-milk", "mocha", "milkshake","lemonade", "milk-tea"];
     let cur_drink = "";
     let num_hint = 3;
-    $(function() {
+    const startGame = function() {
         /* Get the canvas and 2D context */
         const cv = $("canvas").get(0);
         const context = cv.getContext("2d");
@@ -376,90 +372,83 @@
         }
 
         /* Handle the start of the game */
-        $("#start-button").on("click", function() {
-            sounds.background.play();
-            cur_drink = drinks[Math.floor(Math.random() * 7)];//randomize drink order
-            $("#ordered-item").text(cur_drink);
-            requestAnimationFrame(doFrame);
+        sounds.background.play();
+        cur_drink = drinks[Math.floor(Math.random() * 7)];//randomize drink order
+        $("#ordered-item").text(cur_drink);
+        requestAnimationFrame(doFrame);
 
-            /* Handle the keydown of arrow keys and spacebar */
-            $(document).on("keydown", function(event) { //triggered when you press down a key
-
-
-                /* TODO */
-                /* Handle the key down */
-                switch(event.keyCode){
-                    case(37): //left
-                        player.move(1);
-                        break;
-                    case(38): //up
-                        player.move(2);
-                        break;
-                    case(39): //right
-                        player.move(3);
-                        break;
-                    case(40): //down
-                        player.move(4);
-                        break;
-                    case(32): //spacebar
-                        if (num_hint>0 && $("#hint-content").text()=="") {
-                            num_hint -= 1;
-                            // show hint
-                            fetch("/gethint", {
-                                    method: "POST",
-                                    headers: {
-                                        "Content-Type": "application/json"
-                                    },
-                                    body: JSON.stringify({cur_drink})
-                                })
-                                .then(response => response.json())
-                                .then(json => {
-                                    $("#hint-content").text(json.recipe);
-                                })
-                                .catch(error => {
-                                    console.error(error);
-                                });
-                                const currentNumber = parseInt($("#num_hint").text());
-                                $("#num_hint").text(currentNumber - 1);
-                        }
-                        break;
-                };
-
-            });
-
-            /* Handle the keyup of arrow keys and spacebar */
-            $(document).on("keyup", function(event) { //triggered when you release a key
+        /* Handle the keydown of arrow keys and spacebar */
+        $(document).on("keydown", function(event) { //triggered when you press down a key
 
 
-                /* TODO */
-                /* Handle the key up */
-                switch(event.keyCode){
-                    case(37): //left
-                        player.stop(1);
-                        break;
-                    case(38): //up
-                        player.stop(2);
-                        break;
-                    case(39): //right
-                        player.stop(3);
-                        break;
-                    case(40): //down
-                        player.stop(4);
-                        break;
-                    case(32): //spacebar
-                        player.slowDown();
-                        break;
-                };
+            /* TODO */
+            /* Handle the key down */
+            switch(event.keyCode){
+                case(37): //left
+                    player.move(1);
+                    break;
+                case(38): //up
+                    player.move(2);
+                    break;
+                case(39): //right
+                    player.move(3);
+                    break;
+                case(40): //down
+                    player.move(4);
+                    break;
+                case(32): //spacebar
+                    if (num_hint>0 && $("#hint-content").text()=="") {
+                        num_hint -= 1;
+                        // show hint
+                        fetch("/gethint", {
+                                method: "POST",
+                                headers: {
+                                    "Content-Type": "application/json"
+                                },
+                                body: JSON.stringify({cur_drink})
+                            })
+                            .then(response => response.json())
+                            .then(json => {
+                                $("#hint-content").text(json.recipe);
+                            })
+                            .catch(error => {
+                                console.error(error);
+                            });
+                            const currentNumber = parseInt($("#num_hint").text());
+                            $("#num_hint").text(currentNumber - 1);
+                    }
+                    break;
+            };
 
-            });
-
-            /* Start the game */
-            //gem.randomize(gameArea);
-            // cur_drink = drinks[Math.floor(Math.random() * 7)];  //randomize drink order
-            // $("#ordered-item").text(cur_drink);
-            // requestAnimationFrame(doFrame);
         });
-    });
+
+        /* Handle the keyup of arrow keys and spacebar */
+        $(document).on("keyup", function(event) { //triggered when you release a key
+
+
+            /* TODO */
+            /* Handle the key up */
+            switch(event.keyCode){
+                case(37): //left
+                    player.stop(1);
+                    break;
+                case(38): //up
+                    player.stop(2);
+                    break;
+                case(39): //right
+                    player.stop(3);
+                    break;
+                case(40): //down
+                    player.stop(4);
+                    break;
+                case(32): //spacebar
+                    player.slowDown();
+                    break;
+            };
+
+        });
+
+    };
 
     </script>
 
