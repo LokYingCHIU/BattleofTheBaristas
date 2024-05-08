@@ -136,9 +136,6 @@ app.get("/validate", (req, res) => {
     //
     const thisuser = req.session.user;
     res.json({status: "success", user:thisuser}); return;
- 
-    // Delete when appropriate
-    res.json({ status: "error", error: "This endpoint is not yet implemented." });
 });
 
 // Handle the /signout endpoint
@@ -152,10 +149,18 @@ app.get("/signout", (req, res) => {
     // Sending a success response
     //
     res.json({status: "success"}); return;
-    // Delete when appropriate
-    res.json({ status: "error", error: "This endpoint is not yet implemented." });
 });
 
+// Handle the /gethint endpoint
+app.post("/gethint", (req, res) => {
+    const { cur_drink } = req.body;
+
+    const recipes = JSON.parse(fs.readFileSync("./data/recipe.json")); 
+    const correct_recipe = recipes[cur_drink].ingredients;
+
+    res.json({status: "success", recipe: correct_recipe}); 
+    return;
+});
 
 //
 // ***** Please insert your Lab 6 code here *****
@@ -231,13 +236,10 @@ io.on("connection", (socket) => {
         const user = socket.request.session.user;
         const recipes = JSON.parse(fs.readFileSync("./data/recipe.json")); 
         const correct_recipe = recipes[drinkname].ingredients;
-        // console.log("correct: ", JSON.stringify(correct_recipe), ", player: ", JSON.stringify(playerrecipe.sort()))
         if (JSON.stringify(correct_recipe) === JSON.stringify(playerrecipe.sort())) {
-            // console.log("post check result, username: ", user, ", drinkname:, ", drinkname, ", success")
             io.emit("post check result", user, drinkname, "success");
         }
         else {
-            // console.log("post check result, username: ", user, ", drinkname:, ", drinkname, ", fail")
             io.emit("post check result", user, drinkname, "fail");
         }
     });

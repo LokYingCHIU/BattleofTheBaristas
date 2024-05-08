@@ -14,7 +14,7 @@
     #game-container {
         position: relative;
     }
-    canvas, #counter, #game-start, #game-over, #order, #points_self, #points_oppo{
+    canvas, #counter, #game-start, #game-over, #order, #points_self, #points_oppo, #hint-box{
         position: absolute;
         top: 0px;
         left: 0px;
@@ -98,6 +98,18 @@
             </text>
         </svg>
 
+        <svg xmlns="http://www.w3.org/2000/svg" id="hint-box">
+            <text x="170" y="60">
+                # of HINT LEFT: <tspan id="num_hint">3</tspan>
+            </text>
+            <text x="170" y="80">
+                HINT:
+            </text>
+            <text x="170" y="100">
+                <tspan id="hint-content"></tspan>
+            </text>
+        </svg>
+
         <svg xmlns="http://www.w3.org/2000/svg" id="game-start">
             <defs>
                 <linearGradient id="title-fill" x1="0" y1="0" x2="0" y2="1">
@@ -112,7 +124,6 @@
         </svg>
 
         <svg xmlns="http://www.w3.org/2000/svg" id="game-over" style="display: none">
-        <!-- <svg xmlns="http://www.w3.org/2000/svg" id="game-over"> -->
             <defs>
                 <linearGradient id="game-over-fill" x1="0" y1="0" x2="0" y2="1">
                     <stop offset="0" stop-color="red" />
@@ -200,6 +211,9 @@
     <script src="./scripts/ingredients.js"></script>
 
     <script>
+    const drinks = ["matcha", "latte", "choco-milk", "mocha", "milkshake","lemonade", "milk-tea"]; 
+    let cur_drink = "";
+    let num_hint = 3;
     $(function() {
         /* Get the canvas and 2D context */
         const cv = $("canvas").get(0);
@@ -215,16 +229,12 @@
         const totalGameTime = 20;   // Total game time in seconds
         const gemMaxAge = 3000;     // The maximum age of the gems in milliseconds
         let gameStartTime = 0;      // The timestamp when the game starts
-        // let points_s = 0;      // The number of gems collected in the game for player1
-        // let points_o = 0;       // The number of gems collected in the game for player2
 
         /* Create the game area */
         const gameArea = BoundingBox(context, 100, 100, 550, 550);
 
         /* Create the sprites in the game */
-        const drinks = ["matcha", "latte", "choco-milk", "mocha", "milkshake","lemonade", "milk-tea"]; 
         let inblender = [];
-        let cur_drink = "";
 
         const player = Player(context, 320, 270, gameArea); // The player
         const gem = Gem(context, 450, 450, "green");        // The gem
@@ -369,7 +379,26 @@
                         player.move(4);
                         break;
                     case(32): //spacebar
-                        player.speedUp();
+                        if (num_hint>0 && $("#hint-content").text()=="") {
+                            num_hint -= 1;
+                            // show hint
+                            fetch("/gethint", {
+                                    method: "POST",
+                                    headers: {
+                                        "Content-Type": "application/json"
+                                    },
+                                    body: JSON.stringify({cur_drink})
+                                })
+                                .then(response => response.json())
+                                .then(json => {
+                                    $("#hint-content").text(json.recipe);
+                                })
+                                .catch(error => {
+                                    console.error(error);
+                                });
+                                const currentNumber = parseInt($("#num_hint").text());
+                                $("#num_hint").text(currentNumber - 1);
+                        }
                         break;
                 };
 
@@ -403,7 +432,7 @@
 
             /* Start the game */
             //gem.randomize(gameArea);
-            cur_drink = drinks[Math.floor(Math.random() * 7)];//randomize drink order
+            cur_drink = drinks[Math.floor(Math.random() * 7)];  //randomize drink order
             $("#ordered-item").text(cur_drink);
             requestAnimationFrame(doFrame);
         });
