@@ -83,6 +83,28 @@ const Socket = (function() {
                 if (JSON.stringify(you) === JSON.stringify(player)) { // you got a point
                     const currentNumber = parseInt($("#points_s").text());
                     $("#points_s").text(currentNumber + 1);
+
+                    if(drinkName == "matcha"){
+                        $("#matcha").show();
+                        $("#matcha").fadeOut(500);
+                    }
+                    else if(drinkName == "latte" || drinkName == "mocha" || drinkName == "milk-tea"){
+                        $("#latte").show();
+                        $("#latte").fadeOut(500);
+                    }
+                    else if(drinkName == "lemonade"){
+                        $("#lemonade").show();
+                        $("#lemonade").fadeOut(500);
+                    }
+                    else if(drinkName == "choco-milk"){
+                        $("#chocmilk").show();
+                        $("#chocmilk").fadeOut(500);
+                    }
+                    else if(drinkName == "milkshake"){
+                        $("#milkshake").show();
+                        $("#milkshake").fadeOut(500);
+                    }
+                    
                 }
                 else { // the opponent got a point
                     const currentNumber = parseInt($("#points_o").text());

@@ -41,6 +41,13 @@
         animation-duration: 0.7s;
     }
 
+    .svg-drinks {
+        position: absolute;
+        transform: translate(200px, 250px);
+        animation-name: none;
+        animation-duration: 0.7s;
+    }
+
     #counter text {
         font-size: 130%;
         fill: white;
@@ -69,6 +76,8 @@
         66%  { transform: translateX(310px) translateY(520px)rotate(-30deg) ;}
         100% { transform: translateX(310px) translateY(520px)rotate(0deg) ;}
     }
+
+
     </style>
 </head>
 <body>
@@ -178,6 +187,13 @@
         <div id="online-users-panel" class="col">
             <div id="online-users-area" class="col"></div>
         </div>
+
+        <img class= "svg-drinks" id="matcha" src='./images/matcha.svg'   height='20%' width='20%' style="display: none"/>
+        <img class= "svg-drinks" id="milkshake" src='./images/milkshake.svg' height='20%' width='20%' style="display: none"/>
+        <img class= "svg-drinks" id="lemonade" src='./images/lemonade.svg'   height='20%' width='20%' style="display: none"/>
+        <img class= "svg-drinks" id="chocmilk" src='./images/chocmilk.svg'   height='20%' width='20%' style="display: none"/>
+        <img class= "svg-drinks" id="latte" src='./images/latte.svg'   height='20%' width='20%' style="display: none"/>
+        <!--  -->
     </div>
 
     <!-- SIGN IN PART -->
@@ -300,6 +316,10 @@
             }
             player.calibrate(gameArea);
             player.draw();
+        });
+
+        $("matcha").on("animationend", function() {
+            $("#matcha").css("animation-name", "none");
         });
 
         /* The main processing of the game */
