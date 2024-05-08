@@ -168,7 +168,7 @@ const OnlineUsersPanel = (function() {
 		const userDiv = onlineUsersArea.find("#username-" + user.username);
 		// Remove the user
         if (userDiv.length > 0) userDiv.remove();
-        console.log(user)
+        //console.log(user)
     };
     
     const countUser = function() {
@@ -289,23 +289,6 @@ const typerField = (function() {
     return {displayTyper};
 })();
 
-// const Game = (function () {
-//     const start = function () {
 
-//         const sounds = {
-//             background: new Audio("./audio/background.mp3"),
-//             collect: new Audio("./audio/collect.mp3"),
-//             gameover: new Audio("./audio/gameover.mp3")
-//         };
-
-//         sounds.background.play();
-//         $("#game-start").hide();
-//         cur_drink = drinks[Math.floor(Math.random() * 7)];//randomize drink order
-//         $("#ordered-item").text(cur_drink);
-//         requestAnimationFrame(doFrame);
-//     }
-
-//     return { start };
-// })();
 
 
