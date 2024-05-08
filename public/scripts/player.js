@@ -40,7 +40,7 @@ const Player = function(ctx, x, y, gameArea) {
     let direction = 0;
 
     // This is the moving speed (pixels per second) of the player
-    let speed = 150;
+    let speed = 250;
 
     // This function sets the player's moving direction.
     // - `dir` - the moving direction (1: Left, 2: Up, 3: Right, 4: Down)
