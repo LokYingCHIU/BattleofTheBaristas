@@ -21,9 +21,7 @@
         left: 0px;
     }
     canvas, #game-start, #game-over {
-        border: 1px solid gray;
-        /* width: 854px;
-        height: 480px; */
+        border: 1px solid white;
         width: 650px;
         height: 620px;
     }
@@ -124,10 +122,9 @@
             <svg xmlns="http://www.w3.org/2000/svg" id="game-start">
                 <defs>
                     <linearGradient id="title-fill" x1="0" y1="0" x2="0" y2="1">
-                        <stop offset="0.2" stop-color="red" />
-                        <stop offset="0.4" stop-color="yellow" />
-                        <stop offset="0.6" stop-color="green" />
-                        <stop offset="0.8" stop-color="purple" />
+                        <stop offset="0.33" stop-color="#94D1BE" />
+                        <stop offset="0.66" stop-color="#EFC7C8" />
+                        <stop offset="0.99" stop-color="#D44D5C" />
                     </linearGradient>
                 </defs>
                 <text id="game-title" x="50%" y="20%">BATTLE OF THE BARISTAS!</text>
@@ -149,9 +146,9 @@
             <svg xmlns="http://www.w3.org/2000/svg" id="game-over" style="display: none">
                 <defs>
                     <linearGradient id="game-over-fill" x1="0" y1="0" x2="0" y2="1">
-                        <stop offset="0" stop-color="red" />
-                        <stop offset="0.5" stop-color="yellow" />
-                        <stop offset="1" stop-color="red" />
+                        <stop offset="0" stop-color="#773344" />
+                        <stop offset="0.5" stop-color="#EFC7C8" />
+                        <stop offset="1" stop-color="#773344" />
                     </linearGradient>
                 </defs>
                 <text x="50%" y="40%">
@@ -260,7 +257,8 @@
         const sounds = {
             background: new Audio("./audio/background.mp3"),
             collect: new Audio("./audio/collect.mp3"),
-            gameover: new Audio("./audio/gameover.mp3")
+            gameover: new Audio("./audio/gameover.mp3"),
+            complete_drink: new Audio("./audio/complete-drink.mp3")
         };
 
         const totalGameTime = 20;   // Total game time in seconds

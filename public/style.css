@@ -1,32 +1,37 @@
 @import url("https://fonts.googleapis.com/css2?family=Abel&display=swap");
 
 :root {
+    --primary-color: #EFC7C8;
+    --secondary-color: #D44D5C;
+    --third-color: #94D1BE;
+    --forth-color: #773344;
+
     --material-icons-color: black;
     --field-color: gray;
     --field-background: white;
     --field-background-hover: #eee;
     --input-background: #eee;
-    --overlay-background: rgba(245, 158, 114, 0.8);
-    --overlay-caption-color: #eb4a40;
-    --overlay-content-background: linear-gradient(white, #fde0c5);
+    --overlay-background: var(--primary-color);
+    --overlay-caption-color: var(--secondary-color);
+    --overlay-content-background: linear-gradient(white, var(--primary-color));
 
-    --header-background: linear-gradient(to right, #eb4a40, #f59e72);
-    --main-panel-background: linear-gradient(white, #fde0c5);
-    --online-users-panel-background: linear-gradient(to right, #fde0c5, #facba6);
+    --header-background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+    --main-panel-background: linear-gradient(white, var(--primary-color));
+    --online-users-panel-background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
     --chat-panel-background: none;
 
     --title-color: white;
     --caption-color: white;
 
-    --font-color: black;
+    --font-color: #3B413C;
     --date-color: gray;
 
-    --register-form-background: linear-gradient(#fde0c5, #facba6);
+    --register-form-background: var(--primary-color);
     --warning-color: red;
 
     --button-color: white;
-    --button-background: #f2855d;
-    --button-background-hover: #f8b58b;
+    --button-background: var(--secondary-color);
+    --button-background-hover: var(--forth-color);
 }
 * {
     font-family: "Abel", sans-serif;
