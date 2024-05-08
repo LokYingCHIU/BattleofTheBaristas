@@ -4,6 +4,8 @@ const bcrypt = require("bcrypt");
 const fs = require("fs");
 const session = require("express-session");
 
+let userCount = 0;
+
 // Create the Express app
 const app = express();
 
@@ -183,6 +185,7 @@ io.on("connection", (socket) => {
         const {username, avatar, name} = user;
         onlineUserList[username] = user;
         io.emit("add user", JSON.stringify(user));
+        userCount += 1;
     }
 
     socket.on("disconnect", () => {
@@ -194,6 +197,10 @@ io.on("connection", (socket) => {
                 delete onlineUserList[username];
             }  
             io.emit("remove user", JSON.stringify(user));
+            userCount -= 1;
+            if(userCount<2){
+                io.emit("stop game");
+            }
         }
     });
 
@@ -243,6 +250,13 @@ io.on("connection", (socket) => {
             io.emit("post check result", user, drinkname, "fail");
         }
     });
+
+    socket.on("start game", () => {
+        // Send the online users to the browser
+        if(userCount > 1) {
+            io.emit("game started");}
+    });
+
 });
 
 // Use a web server to listen at port 8000

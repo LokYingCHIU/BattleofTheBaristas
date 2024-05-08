@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -158,6 +159,13 @@
             </g>
         </svg>
     </div>
+    <div id="online-users-panel" class="col">
+        <div id="online-users-area" class="col"></div>
+    </div>
+
+    <div id="button-start" class = "button">
+        <button id="start-button" style="display: none;">Start!</button>
+    </div>
 
     <!-- SIGN IN PART -->
 
@@ -211,7 +219,7 @@
     <script src="./scripts/ingredients.js"></script>
 
     <script>
-    const drinks = ["matcha", "latte", "choco-milk", "mocha", "milkshake","lemonade", "milk-tea"]; 
+    const drinks = ["matcha", "latte", "choco-milk", "mocha", "milkshake","lemonade", "milk-tea"];
     let cur_drink = "";
     let num_hint = 3;
     $(function() {
@@ -243,7 +251,7 @@
             Fire(context, gameArea.getPoints().topRight[0], gameArea.getPoints().topRight[1]),
             Fire(context, gameArea.getPoints().bottomLeft[0], gameArea.getPoints().bottomLeft[1]),
             Fire(context, gameArea.getPoints().bottomRight[0], gameArea.getPoints().bottomRight[1])
-        ];            
+        ];
         let ingredient = [
             Ingredient(context, 157,385, "water"),
             Ingredient(context, 157,165, "matchap"),
@@ -277,7 +285,7 @@
             for (let i = 0; i < ingredient.length; i++){
                 ingredient[i].draw();
             }
-            player.calibrate(gameArea); 
+            player.calibrate(gameArea);
             player.draw();
         });
 
@@ -322,7 +330,7 @@
                         sounds.collect.currentTime = 0;
                         sounds.collect.play();
                         ingredient[i] = 0;
-                    
+
                         if(x==157 && y==385)inblender.push("water");
                         else if(x==157 && y==165)inblender.push("matchap");
                         else if(x==157 && y==285)inblender.push("milk");
@@ -348,26 +356,27 @@
             for (let i = 0; i < ingredient.length; i++){
                 if(ingredient[i]!=0)ingredient[i].draw();
             }
-                
+
             /* Process the next frame */
             requestAnimationFrame(doFrame);
         }
 
         /* Handle the start of the game */
-        $("#game-start").on("click", function() {
-            /* Hide the start screen */
+        $("#start-button").on("click", function() {
             sounds.background.play();
-            $("#game-start").hide();
+            cur_drink = drinks[Math.floor(Math.random() * 7)];//randomize drink order
+            $("#ordered-item").text(cur_drink);
+            requestAnimationFrame(doFrame);
 
             /* Handle the keydown of arrow keys and spacebar */
-            $(document).on("keydown", function(event) { //triggered when you press down a key 
+            $(document).on("keydown", function(event) { //triggered when you press down a key
 
 
                 /* TODO */
                 /* Handle the key down */
                 switch(event.keyCode){
                     case(37): //left
-                        player.move(1); 
+                        player.move(1);
                         break;
                     case(38): //up
                         player.move(2);
@@ -405,14 +414,14 @@
             });
 
             /* Handle the keyup of arrow keys and spacebar */
-            $(document).on("keyup", function(event) { //triggered when you release a key 
+            $(document).on("keyup", function(event) { //triggered when you release a key
 
 
                 /* TODO */
                 /* Handle the key up */
                 switch(event.keyCode){
                     case(37): //left
-                        player.stop(1); 
+                        player.stop(1);
                         break;
                     case(38): //up
                         player.stop(2);

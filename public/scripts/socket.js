@@ -66,6 +66,18 @@ const Socket = (function() {
             typerField.displayTyper(typingUser);
         });
 
+        socket.on("game started", () => {
+            $("#game-start").hide();
+            $("#start-button").show();
+            
+        });
+
+        socket.on("stop game", () => {
+            $("#game-start").show();
+            $("#start-button").hide();
+            
+        });
+
         //Set up the posting check drink result event
         socket.on("post check result", (player, drinkName, result) => {
             console.log("player: ", player, ", drink name: ", drinkName, ", post check result: ", result);
@@ -112,5 +124,10 @@ const Socket = (function() {
         socket.emit("check drink", drinkName, playerRecipe);
     };
 
-    return { getSocket, connect, disconnect, postMessage, isTyping, checkDrink };
+    const checkUserCount = function() {
+        //if(OnlineUsersPanel.countUser())
+        socket.emit("start game");
+        };
+
+    return { getSocket, connect, disconnect, postMessage, isTyping, checkDrink, checkUserCount };
 })();
