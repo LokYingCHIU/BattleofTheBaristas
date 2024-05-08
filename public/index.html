@@ -78,7 +78,7 @@
     
             <svg xmlns="http://www.w3.org/2000/svg" id="counter">
                 <text x="10" y="35">
-                    TIME:<tspan id="time-remaining">20</tspan>
+                    TIME: <tspan id="time-remaining">20</tspan>
                 </text>
             </svg>
     
@@ -148,12 +148,15 @@
                 <text x="50%" y="40%">
                     Time's up!
                 </text>
-                <text x="50%" y="45%">
+                <text x="50%" y="45%" > 
+                    <tspan id="game-winner"></tspan>
+                </text>
+                <text x="50%" y="50%">
                     Player1 (you) have collected
                     <tspan id="final-score-player1">0</tspan>
                     gem(s).
                 </text>
-                <text x="50%" y="50%">
+                <text x="50%" y="55%">
                     Player2 have collected
                     <tspan id="final-score-player2">0</tspan>
                     gem(s).
@@ -312,6 +315,18 @@
             /* TODO */
             /* Handle the game over situation here */
             if(timeRemaining <= 0  ){
+                const your_points = parseInt($("#points_s").text());
+                const oppo_points = parseInt($("#points_o").text());
+                if (your_points > oppo_points) {
+                    $("#game-winner").text("YOU WIN! ^v^");
+                }
+                else if (your_points < oppo_points) {
+                    $("#game-winner").text("YOUR OPPONENT WINS! T^T");
+                }
+                else {
+                    $("#game-winner").text("TIE!");
+                }
+                
                 $("#final-score-player1").text($("#points_s").text());
                 $("#final-score-player2").text($("#points_o").text());
                 $("#game-over").show();
@@ -441,9 +456,9 @@
                 case(40): //down
                     player.stop(4);
                     break;
-                case(32): //spacebar
-                    player.slowDown();
-                    break;
+                // case(32): //spacebar
+                //     player.slowDown();
+                //     break;
             };
 
         });
