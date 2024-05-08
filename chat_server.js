@@ -164,6 +164,7 @@ app.get("/signout", (req, res) => {
 //
 const {createServer} = require("http");
 const {Server} = require("socket.io");
+const { SSL_OP_NO_TLSv1_2 } = require("constants");
 const httpServer = createServer(app);
 const io = new Server(httpServer);
 
@@ -207,6 +208,9 @@ io.on("connection", (socket) => {
             }  
             io.emit("remove user", JSON.stringify(user));
             userCount -= 1;
+            if(userCount<2){
+                io.emit("stop game");
+            }
         }
     });
 
@@ -244,7 +248,6 @@ io.on("connection", (socket) => {
     socket.on("start game", (typingUser) => {
         // Send the online users to the browser
         if(userCount > 1) {
-            console.log("server activaatedd!!!!!!!!!!");
             io.emit("game started");}
     });
 

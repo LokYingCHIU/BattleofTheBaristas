@@ -69,19 +69,16 @@ const Socket = (function() {
         });
 
         socket.on("game started", (typingUser) => {
-            // console.log("socket activated!!!!!!!!!");
+            $("#game-start").hide();
+            $("#start-button").show();
             
-            // $("#game-title").text("hello");
-            // console.log("it shouldbe hidden");
+        });
 
-            try{
-                $("#game-start").hide();
-            }
-            catch(err){
-                console.log("the game start hide is errorr!!!!!!!!")
-            }
+        socket.on("stop game", (typingUser) => {
+            $("#game-start").show();
+            $("#start-button").hide();
             
-    });
+        });
 
         //Set up the posting check drink result event
         socket.on("post check result", (player, drinkName, result) => {
