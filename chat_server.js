@@ -201,6 +201,7 @@ io.on("connection", (socket) => {
                 io.emit("stop game");
             }
         }
+        io.emit("game stop");
     });
 
     socket.on("get users", () => {

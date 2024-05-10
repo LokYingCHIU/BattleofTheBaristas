@@ -15,7 +15,13 @@
     #game-container {
         position: relative;
     }
-    canvas, #counter, #game-start, #game-over, #order, #points_self, #points_oppo, #hint-box{
+
+    #signout-button {
+        position: absolute;
+        top: 0px;
+        left: 850px;
+    }
+    canvas, #counter, #game-start, #game-over, #order, #points_self, #points_oppo, #hint-box {
         position: absolute;
         top: 0px;
         left: 0px;
@@ -185,6 +191,7 @@
         <div id="online-users-panel" class="col">
             <div id="online-users-area" class="col"></div>
         </div>
+        <button id="signout-button" class="icon"><span class="material-icons">logout</span></button>
 
         <img class= "svg-drinks" id="matcha-latte" src='./images/matcha.svg'   height='20%' width='20%' style="display: none"/>
         <img class= "svg-drinks" id="milkshake" src='./images/milkshake.svg' height='20%' width='20%' style="display: none"/>

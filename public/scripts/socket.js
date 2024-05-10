@@ -47,7 +47,7 @@ const Socket = (function() {
         });
 
         socket.on("stop game", () => {
-            $("#game-over").show();
+            $("#signin-overlay").fadeIn(500);
         });
 
         //Set up the posting check drink result event
