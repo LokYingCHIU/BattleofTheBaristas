@@ -263,16 +263,3 @@ const UI = (function() {
     return { getUserDisplay, initialize };
 })();
 
-const typerField = (function() {
-    const displayTyper = function(typingUser){
-        const currentUser = Authentication.getUser();
-        if (typingUser.username != currentUser.username){
-            $("#typing-text").text(typingUser.name + " is typing...");
-            $("#typing-text").show();
-            setTimeout(()=>{$("#typing-text").hide()}, 3000);
-            //setTimeout($("#typing-text").fadeOut(3000), 3000);
-        }
-    }
-
-    return {displayTyper};
-})();

@@ -103,13 +103,7 @@ const Authentication = (function() {
     // * `onError`   - This is a callback function to be called when the
     //                 request fails in this form `onError(error)`
     const signout = function(onSuccess, onError) {
-        // fetch("/signout", {
-        //     method: "GET",
-        //     headers: {
-        //         "Content-Type": "application/json"
-        //     },
-        //     body: data
-        // })
+
         fetch("/signout")
             .then((res) => {
                 return res.json()

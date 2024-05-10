@@ -110,12 +110,11 @@ app.post("/signin", (req, res) => {
     }   
     
     // G. Sending a success response with the user account
-    //
+    
     const _avatar = users[username].avatar;
     const _name = users[username].name;
     const _user = {username, "avatar": _avatar, "name":_name};
-    req.session.user = _user;
-    //res.json({status: "success", user:_user}); 
+    req.session.user = _user; 
     res.json({status: "success", user:_user});
     return;
 });
