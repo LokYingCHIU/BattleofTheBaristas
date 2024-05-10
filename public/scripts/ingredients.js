@@ -7,7 +7,7 @@ const Ingredient = function(ctx, x, y, item) {
         lemon: { x: 192, y: 0, width: 48, height: 50, count: 1, timing: 200, loop: true },
         tea: { x: 288, y: 0, width: 48, height: 50, count: 1, timing: 200, loop: true },
         coffee: { x: 0, y: 0, width: 48, height: 50, count: 1, timing: 200, loop: true },
-        ice: { x: 96, y: 0, width: 48, height: 50, count: 1, timing: 200, loop: true }
+        icecream: { x: 96, y: 0, width: 48, height: 50, count: 1, timing: 200, loop: true }
     };
 
         // This is the sprite object of the player created from the Sprite module.

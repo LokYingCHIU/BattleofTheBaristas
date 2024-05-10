@@ -92,8 +92,10 @@ const Socket = (function() {
                     
                 }
                 else { // the opponent got a point
-                    const currentNumber = parseInt($("#points_o").text());
-                    $("#points_o").text(currentNumber + 1);
+                    if (JSON.stringify(you) === JSON.stringify(player)) { // you made a wrong drink
+                        const currentNumber = parseInt($("#points_o").text());
+                        $("#points_o").text(currentNumber + 1);
+                    }
                 }
             }
             else{

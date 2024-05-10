@@ -12,7 +12,7 @@
         "ingredients": ["choco", "coffee", "milk"]
     },
     "milkshake": {
-        "ingredients": ["ice", "milk"]
+        "ingredients": ["icecream", "milk"]
     },
     "lemonade": {
         "ingredients": ["lemon", "water"]
