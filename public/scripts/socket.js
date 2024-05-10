@@ -92,16 +92,16 @@ const Socket = (function() {
                     
                 }
                 else { // the opponent got a point
-                    if (JSON.stringify(you) === JSON.stringify(player)) { // you made a wrong drink
-                        const currentNumber = parseInt($("#points_o").text());
-                        $("#points_o").text(currentNumber + 1);
-                    }
+                    const currentNumber = parseInt($("#points_o").text());
+                    $("#points_o").text(currentNumber + 1);
                 }
             }
             else{
-                // if the result is not success, show cross
-            $("#cross-mark").show();
-            $("#cross-mark").fadeOut(500);
+                // if your result is not success, show cross
+                if (JSON.stringify(you) === JSON.stringify(player)) {
+                    $("#cross-mark").show();
+                    $("#cross-mark").fadeOut(500);
+                }
             }
             
         });
