@@ -15,9 +15,6 @@ const Socket = (function() {
         socket.on("connect", () => {
             // Get the online user list
             socket.emit("get users");
-
-            // Get the chatroom messages
-            socket.emit("get messages");
         });
 
         // Set up the users event
@@ -44,28 +41,6 @@ const Socket = (function() {
             OnlineUsersPanel.removeUser(user);
         });
 
-        // Set up the messages event
-        socket.on("messages", (chatroom) => {
-            chatroom = JSON.parse(chatroom);
-
-            // Show the chatroom messages
-            ChatPanel.update(chatroom);
-        });
-
-        // Set up the add message event
-        socket.on("add message", (message) => {
-            message = JSON.parse(message);
-
-            // Add the message to the chatroom
-            ChatPanel.addMessage(message);
-        });
-
-        // Set up the typing event
-        socket.on("typingAlert", (typingUser) => {
-            typingUser = JSON.parse(typingUser);
-            typerField.displayTyper(typingUser);
-        });
-
         socket.on("game started", () => {
             $("#game-start").hide();
             startGame();
@@ -84,9 +59,9 @@ const Socket = (function() {
                     const currentNumber = parseInt($("#points_s").text());
                     $("#points_s").text(currentNumber + 1);
 
-                    if(drinkName == "matcha"){
-                        $("#matcha").show();
-                        $("#matcha").fadeOut(500);
+                    if(drinkName == "matcha-latte"){
+                        $("#matcha-latte").show();
+                        $("#matcha-latte").fadeOut(500);
                     }
                     else if(drinkName == "latte" || drinkName == "mocha" || drinkName == "milk-tea"){
                         $("#latte").show();
@@ -126,18 +101,6 @@ const Socket = (function() {
         socket = null;
     };
 
-    // This function sends a post message event to the server
-    const postMessage = function(content) {
-        if (socket && socket.connected) {
-            socket.emit("post message", content);
-        }
-    };
-
-    // This function sends a typing event to the server
-    const isTyping = function(typingUser) {
-        socket.emit("typingAlert", typingUser);
-    };
-
     // This function sends a check event to the server
     const checkDrink = function(drinkName, playerRecipe) {
         socket.emit("check drink", drinkName, playerRecipe);
@@ -148,5 +111,5 @@ const Socket = (function() {
         socket.emit("start game");
         };
 
-    return { getSocket, connect, disconnect, postMessage, isTyping, checkDrink, checkUserCount };
+    return { getSocket, connect, disconnect, postMessage, checkDrink, checkUserCount };
 })();
