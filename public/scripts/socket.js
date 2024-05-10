@@ -104,6 +104,11 @@ const Socket = (function() {
                         $("#milkshake").show();
                         $("#milkshake").fadeOut(500);
                     }
+
+                    // assign new drink
+                    cur_drink = drinks[Math.floor(Math.random() * 7)];
+                    $("#ordered-item").text(cur_drink);
+                    $("#hint-content").text("");
                     
                 }
                 else { // the opponent got a point
@@ -112,11 +117,6 @@ const Socket = (function() {
                 }
             }
             // if the result is not success, do nothing
-
-            // assign new drink
-            cur_drink = drinks[Math.floor(Math.random() * 7)];
-            $("#ordered-item").text(cur_drink);
-            $("#hint-content").text("");
         });
     };
 

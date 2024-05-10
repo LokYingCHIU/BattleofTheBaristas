@@ -23,5 +23,10 @@
   "avatar": "Panda",
   "name": "vete",
   "password": "$2b$10$l9jxQsV6g7tEuj9oQo6Nsulvuwor6U062DLo2HIG0JTzDNilk68P."
+ },
+ "momo": {
+  "avatar": "Kangaroo",
+  "name": "momo",
+  "password": "$2b$10$9Ix1sD33wRRIUz4XdYQWpu2Z2zM7LRTnHSqRqv/IhX5fz8fre8FYm"
  }
 }

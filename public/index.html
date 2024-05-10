@@ -91,7 +91,7 @@
     
             <svg xmlns="http://www.w3.org/2000/svg" id="order">
                 <text x="170" y="35">
-                    ORDER: <tspan id="ordered-item">matcha</tspan>
+                    ORDER: <tspan id="ordered-item">matcha latte</tspan>
                 </text>
             </svg>
     
@@ -130,16 +130,17 @@
                 <text id="game-title" x="50%" y="20%">BATTLE OF THE BARISTAS!</text>
 
                 <g style="font-size: x-small;">
-                    <text x="50%" y="40%">Get ready to showcase your barista skills in this fast-paced competition.</text>
-                    <text x="50%" y="45%">Can you handle the pressure and fulfill drink orders like a true professional?</text>
-                    <text x="50%" y="50%">Each session lasts for 4 minutes, during which you will compete with another player.</text>
-                    <text x="50%" y="50%"></text>
-                    <text x="50%" y="55%">How to play: Your goal is to fulfill as many drink orders as you can within the given time.</text>
-                    <text x="50%" y="60%">You can get hints of how to make the drink by hitting the space bar.</text>
-                    <text x="50%" y="65%">You will have maximum three hints in one game.</text>
-                    <text x="50%" y="70%">Every correct drink you make earns you 1 point.</text>
-                    <text x="50%" y="75%">The player with the highest score at the end of the session will be declared the winner.</text>
+                    <text x="50%" y="35%">Get ready to showcase your barista skills in this fast-paced competition.</text>
+                    <text x="50%" y="40%">Can you handle the pressure and fulfill drink orders like a true professional?</text>
+                    <text x="50%" y="45%">Each session lasts for 4 minutes, during which you will compete with another player.</text>
+                    <text x="50%" y="50%">How to play: Your goal is to fulfill as many drink orders as you can within the given time.</text>
+                    <text x="50%" y="55%">You can get hints of how to make the drink by hitting the space bar.</text>
+                    <text x="50%" y="60%">You will have maximum three hints in one game.</text>
+                    <text x="50%" y="65%">Every correct drink you make earns you 1 point.</text>
+                    <text x="50%" y="70%">The player with the highest score at the end of the session will be declared the winner.</text>
                 </g>
+
+                <text x="50%" y="80%">CLICK HERE TO START THE GAME!</text>
 
             </svg>
     
@@ -158,14 +159,14 @@
                     <tspan id="game-winner"></tspan>
                 </text>
                 <text x="50%" y="50%">
-                    Player1 (you) have collected
+                    Player1 (you) have made 
                     <tspan id="final-score-player1">0</tspan>
-                    gem(s).
+                    drink(s).
                 </text>
                 <text x="50%" y="55%">
-                    Player2 have collected
+                    Player2 have made
                     <tspan id="final-score-player2">0</tspan>
-                    gem(s).
+                    drink(s).
                 </text>
             </svg>
     
@@ -245,7 +246,7 @@
     <script src="./scripts/ingredients.js"></script>
 
     <script>
-    const drinks = ["matcha", "latte", "choco-milk", "mocha", "milkshake","lemonade", "milk-tea"];
+    const drinks = ["matcha-latte", "latte", "choco-milk", "mocha", "milkshake","lemonade", "milk-tea"];
     let cur_drink = "";
     let num_hint = 3;
     const startGame = function() {
@@ -261,7 +262,7 @@
             complete_drink: new Audio("./audio/complete-drink.mp3")
         };
 
-        const totalGameTime = 20;   // Total game time in seconds
+        const totalGameTime = 240;   // Total game time in seconds
         const gemMaxAge = 3000;     // The maximum age of the gems in milliseconds
         let gameStartTime = 0;      // The timestamp when the game starts
 
