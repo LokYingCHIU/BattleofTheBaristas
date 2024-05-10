@@ -209,32 +209,6 @@ io.on("connection", (socket) => {
         socket.emit("users", JSON.stringify(onlineUserList));
     });
 
-    socket.on("get messages", () => {
-        // Send the chatroom messages to the browser
-        const chatroom = JSON.parse(fs.readFileSync("./data/chatroom.json")); 
-        socket.emit("messages", JSON.stringify(chatroom));
-    });
-
-    socket.on("post message", (content) => {
-        // Add the message to the chatroom
-        const user = socket.request.session.user;
-        const newMessage = {
-            user: user,
-            datetime: new Date(),
-            content:  content
-        };
-
-        const chatroom = JSON.parse(fs.readFileSync("./data/chatroom.json")); 
-        chatroom.push(newMessage);
-        fs.writeFileSync("./data/chatroom.json", JSON.stringify(chatroom, null, " "));
-        io.emit("add message", JSON.stringify(newMessage, null, " "));
-    });
-
-    socket.on("typingAlert", (typingUser) => {
-        // Send the online users to the browser
-        io.emit("typingAlert", JSON.stringify(typingUser));
-    });
-
     socket.on("check drink", (drinkname, playerrecipe) =>{ 
         // input:
         //  drinkname: string of the assigned drink name
