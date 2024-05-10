@@ -28,5 +28,15 @@
   "avatar": "Kangaroo",
   "name": "momo",
   "password": "$2b$10$9Ix1sD33wRRIUz4XdYQWpu2Z2zM7LRTnHSqRqv/IhX5fz8fre8FYm"
+ },
+ "vans": {
+  "avatar": "Kangaroo",
+  "name": "vanessa",
+  "password": "$2b$10$Jxajks4ULYTsiM8sgQ/yDe77uB5Twx1WAQGgkN96haC4LwT6il.cO"
+ },
+ "username": {
+  "avatar": "Koala",
+  "name": "vanessa",
+  "password": "$2b$10$ZqI8LOEtmPUNf7wnElFWSel/.cWPfimfmgCDB0F8rGD9m.jcfgq1q"
  }
 }

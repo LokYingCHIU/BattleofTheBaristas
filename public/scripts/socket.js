@@ -96,7 +96,12 @@ const Socket = (function() {
                     $("#points_o").text(currentNumber + 1);
                 }
             }
-            // if the result is not success, do nothing
+            else{
+                // if the result is not success, show cross
+            $("#cross-mark").show();
+            $("#cross-mark").fadeOut(500);
+            }
+            
         });
     };
 
