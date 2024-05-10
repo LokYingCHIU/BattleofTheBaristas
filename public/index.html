@@ -248,18 +248,19 @@
     const drinks = ["matcha-latte", "latte", "choco-milk", "mocha", "milkshake","lemonade", "milk-tea"];
     let cur_drink = "";
     let num_hint = 3;
-    const startGame = function() {
-        /* Get the canvas and 2D context */
-        const cv = $("canvas").get(0);
-        const context = cv.getContext("2d");
 
-        /* Create the sounds */
-        const sounds = {
+    /* Create the sounds */
+    const sounds = {
             background: new Audio("./audio/background.mp3"),
             collect: new Audio("./audio/collect.mp3"),
             gameover: new Audio("./audio/gameover.mp3"),
             complete_drink: new Audio("./audio/complete-drink.mp3")
-        };
+    };
+
+    const startGame = function() {
+        /* Get the canvas and 2D context */
+        const cv = $("canvas").get(0);
+        const context = cv.getContext("2d");
 
         const totalGameTime = 120;   // Total game time in seconds
         const gemMaxAge = 3000;     // The maximum age of the gems in milliseconds

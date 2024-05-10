@@ -80,6 +80,11 @@ const Socket = (function() {
                         $("#milkshake").fadeOut(500);
                     }
 
+                    // play the complete drink sound
+                    sounds.complete_drink.pause();
+                    sounds.complete_drink.currentTime = 0;
+                    sounds.complete_drink.play();
+
                     // assign new drink
                     cur_drink = drinks[Math.floor(Math.random() * 7)];
                     $("#ordered-item").text(cur_drink);
