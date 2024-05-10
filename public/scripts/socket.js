@@ -48,6 +48,9 @@ const Socket = (function() {
 
         socket.on("stop game", () => {
             $("#signin-overlay").fadeIn(500);
+            sounds.background.pause();
+            sounds.collect.pause();
+            sounds.gameover.play();
         });
 
         //Set up the posting check drink result event
